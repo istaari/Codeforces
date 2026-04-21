@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CF Candidate Master Tracker</title>
+<style>
+/* ── Theme Definitions ── */
+:root, [data-theme="midnight"] {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --surface2: #0f3460;
+  --accent: #e94560;
+  --text: #eee;
+  --text-dim: #999;
+  --green: #00c853;
+  --yellow: #ffd600;
+  --blue: #448aff;
+  --purple: #aa00ff;
+  --border: #2a2a4a;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.06);
+  --input-placeholder: rgba(255,255,255,0.15);
+  --insight-focus-bg: rgba(255,255,255,0.03);
+  --guide-bg: rgba(0,0,0,0.15);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.1);
+}
+
+[data-theme="ocean"] {
+  --bg: #0b1622;
+  --surface: #152232;
+  --surface2: #1a3a5c;
+  --accent: #02a9ff;
+  --text: #e8edf3;
+  --text-dim: #8899aa;
+  --green: #2ee59d;
+  --yellow: #ffb74d;
+  --blue: #64b5f6;
+  --purple: #7c4dff;
+  --border: #1e3a5f;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.06);
+  --input-placeholder: rgba(255,255,255,0.15);
+  --insight-focus-bg: rgba(255,255,255,0.03);
+  --guide-bg: rgba(0,0,0,0.2);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.15);
+}
+
+[data-theme="dracula"] {
+  --bg: #282a36;
+  --surface: #2d303e;
+  --surface2: #343746;
+  --accent: #ff79c6;
+  --text: #f8f8f2;
+  --text-dim: #9a9ab0;
+  --green: #50fa7b;
+  --yellow: #f1fa8c;
+  --blue: #8be9fd;
+  --purple: #bd93f9;
+  --border: #44475a;
+  --hover-overlay: rgba(255,255,255,0.04);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.07);
+  --input-placeholder: rgba(255,255,255,0.18);
+  --insight-focus-bg: rgba(255,255,255,0.04);
+  --guide-bg: rgba(0,0,0,0.15);
+  --code-bg: rgba(255,255,255,0.1);
+  --table-header-bg: rgba(0,0,0,0.1);
+}
+
+[data-theme="nord"] {
+  --bg: #2e3440;
+  --surface: #3b4252;
+  --surface2: #434c5e;
+  --accent: #88c0d0;
+  --text: #eceff4;
+  --text-dim: #9ba5b4;
+  --green: #a3be8c;
+  --yellow: #ebcb8b;
+  --blue: #81a1c1;
+  --purple: #b48ead;
+  --border: #4c566a;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.06);
+  --input-placeholder: rgba(255,255,255,0.15);
+  --insight-focus-bg: rgba(255,255,255,0.03);
+  --guide-bg: rgba(0,0,0,0.12);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.1);
+}
+
+[data-theme="monokai"] {
+  --bg: #272822;
+  --surface: #2d2e27;
+  --surface2: #383930;
+  --accent: #f92672;
+  --text: #f8f8f2;
+  --text-dim: #a6a68a;
+  --green: #a6e22e;
+  --yellow: #e6db74;
+  --blue: #66d9ef;
+  --purple: #ae81ff;
+  --border: #49483e;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.07);
+  --input-placeholder: rgba(255,255,255,0.15);
+  --insight-focus-bg: rgba(255,255,255,0.04);
+  --guide-bg: rgba(0,0,0,0.18);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.12);
+}
+
+[data-theme="solarized"] {
+  --bg: #002b36;
+  --surface: #073642;
+  --surface2: #0a4052;
+  --accent: #cb4b16;
+  --text: #eee8d5;
+  --text-dim: #839496;
+  --green: #859900;
+  --yellow: #b58900;
+  --blue: #268bd2;
+  --purple: #6c71c4;
+  --border: #2a5562;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.06);
+  --input-placeholder: rgba(255,255,255,0.12);
+  --insight-focus-bg: rgba(255,255,255,0.03);
+  --guide-bg: rgba(0,0,0,0.15);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --surface2: #e8ecf1;
+  --accent: #d63864;
+  --text: #1a1a2e;
+  --text-dim: #666;
+  --green: #2e7d32;
+  --yellow: #f57f17;
+  --blue: #1565c0;
+  --purple: #7b1fa2;
+  --border: #d0d7de;
+  --hover-overlay: rgba(0,0,0,0.03);
+  --hover-overlay2: rgba(0,0,0,0.02);
+  --table-row-border: rgba(0,0,0,0.06);
+  --tag-bg: rgba(0,0,0,0.06);
+  --input-placeholder: rgba(0,0,0,0.25);
+  --insight-focus-bg: rgba(0,0,0,0.03);
+  --guide-bg: rgba(0,0,0,0.04);
+  --code-bg: rgba(0,0,0,0.06);
+  --table-header-bg: rgba(0,0,0,0.04);
+}
+
+[data-theme="github-dark"] {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2129;
+  --accent: #f78166;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --green: #3fb950;
+  --yellow: #d29922;
+  --blue: #58a6ff;
+  --purple: #bc8cff;
+  --border: #30363d;
+  --hover-overlay: rgba(255,255,255,0.03);
+  --hover-overlay2: rgba(255,255,255,0.02);
+  --table-row-border: rgba(255,255,255,0.04);
+  --tag-bg: rgba(255,255,255,0.06);
+  --input-placeholder: rgba(255,255,255,0.15);
+  --insight-focus-bg: rgba(255,255,255,0.03);
+  --guide-bg: rgba(0,0,0,0.2);
+  --code-bg: rgba(255,255,255,0.08);
+  --table-header-bg: rgba(0,0,0,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; transition: background .3s, color .3s; }
+
+.header { background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%); padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--accent); }
+.header h1 { font-size: 1.4em; }
+.header h1 span { color: var(--purple); }
+.header-stats { display: flex; gap: 24px; font-size: 0.85em; }
+.header-stat { text-align: center; }
+.header-stat .val { font-size: 1.5em; font-weight: 700; color: var(--accent); }
+.header-stat .label { color: var(--text-dim); font-size: 0.85em; }
+
+.tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 20px; overflow-x: auto; }
+.tab { padding: 12px 20px; cursor: pointer; color: var(--text-dim); font-size: 0.9em; font-weight: 500; border-bottom: 3px solid transparent; transition: all .2s; white-space: nowrap; user-select: none; }
+.tab:hover { color: var(--text); background: var(--hover-overlay); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.content { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.page { display: none; }
+.page.active { display: block; }
+
+.phase-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.phase-tab { padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85em; font-weight: 500; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); transition: all .2s; user-select: none; }
+.phase-tab:hover { border-color: var(--accent); color: var(--text); }
+.phase-tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+.phase-tab .count { font-size: 0.8em; opacity: 0.7; margin-left: 4px; }
+
+.topic-section { margin-bottom: 24px; background: var(--surface); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
+.topic-header { padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+.topic-header:hover { background: var(--hover-overlay2); }
+.topic-header h3 { font-size: 1em; display: flex; align-items: center; gap: 8px; }
+.topic-header .arrow { transition: transform .2s; font-size: 0.8em; color: var(--text-dim); }
+.topic-header.open .arrow { transform: rotate(90deg); }
+.topic-progress { display: flex; align-items: center; gap: 10px; font-size: 0.85em; }
+.progress-bar { width: 120px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.progress-bar .fill { height: 100%; border-radius: 3px; transition: width .3s; }
+.topic-body { display: none; border-top: 1px solid var(--border); }
+.topic-body.open { display: block; }
+
+.pattern-guide { padding: 16px 20px; background: var(--guide-bg); border-bottom: 1px solid var(--border); font-size: 0.85em; line-height: 1.6; }
+.pattern-guide h4 { color: var(--yellow); margin-bottom: 8px; font-size: 0.9em; }
+.pattern-guide ul { padding-left: 18px; }
+.pattern-guide li { margin-bottom: 4px; color: var(--text-dim); }
+.pattern-guide code { background: var(--code-bg); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; color: var(--blue); }
+
+.problem-table { width: 100%; border-collapse: collapse; }
+.problem-table th { text-align: left; padding: 10px 16px; font-size: 0.8em; color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); background: var(--table-header-bg); }
+.problem-table td { padding: 8px 16px; font-size: 0.88em; border-bottom: 1px solid var(--table-row-border); vertical-align: middle; }
+.problem-table tr:hover td { background: var(--hover-overlay2); }
+.problem-table tr.done td { opacity: 0.6; }
+.problem-table tr.done .p-name { text-decoration: line-through; }
+
+.check { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0; }
+.check:hover { border-color: var(--green); }
+.check.checked { background: var(--green); border-color: var(--green); }
+.check.checked::after { content: '\2713'; color: white; font-size: 14px; font-weight: 700; }
+
+.rating { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; font-weight: 600; }
+.rating.r800 { background: rgba(128,128,128,0.2); color: #999; }
+.rating.r900 { background: rgba(128,128,128,0.2); color: #bbb; }
+.rating.r1000 { background: rgba(0,128,0,0.15); color: #4caf50; }
+.rating.r1100 { background: rgba(0,128,0,0.2); color: #66bb6a; }
+.rating.r1200 { background: rgba(0,128,0,0.25); color: #81c784; }
+.rating.r1300 { background: rgba(0,200,200,0.15); color: #26c6da; }
+.rating.r1400 { background: rgba(0,200,200,0.2); color: #4dd0e1; }
+.rating.r1500 { background: rgba(0,200,200,0.2); color: #4dd0e1; }
+.rating.r1600 { background: rgba(68,138,255,0.2); color: #448aff; }
+.rating.r1700,.rating.r1800 { background: rgba(68,138,255,0.25); color: #82b1ff; }
+.rating.r1900,.rating.r2000 { background: rgba(170,0,255,0.2); color: #aa00ff; }
+
+.tag { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 0.75em; margin-right: 3px; background: var(--tag-bg); color: var(--text-dim); }
+
+.insight-input { background: transparent; border: 1px solid transparent; color: var(--text-dim); font-size: 0.85em; padding: 4px 8px; border-radius: 4px; width: 100%; min-width: 150px; }
+.insight-input:focus { outline: none; border-color: var(--accent); background: var(--insight-focus-bg); color: var(--text); }
+.insight-input::placeholder { color: var(--input-placeholder); }
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.stat-card .stat-val { font-size: 2.2em; font-weight: 700; }
+.stat-card .stat-label { color: var(--text-dim); font-size: 0.85em; margin-top: 4px; }
+.stat-card.highlight { border-color: var(--accent); }
+.stat-card.highlight .stat-val { color: var(--accent); }
+
+.phase-progress-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.phase-progress-card h3 { margin-bottom: 12px; font-size: 1em; }
+.bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.bar-label { min-width: 140px; font-size: 0.85em; color: var(--text-dim); }
+.big-bar { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+.big-bar .fill { height: 100%; border-radius: 5px; transition: width .3s; }
+.bar-pct { min-width: 45px; text-align: right; font-size: 0.85em; font-weight: 600; }
+
+.contest-log { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.contest-log h3 { margin-bottom: 12px; }
+.contest-form { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.contest-form input { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 6px; font-size: 0.85em; }
+.contest-form input:focus { outline: none; border-color: var(--accent); }
+.btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; transition: all .2s; }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-sm { padding: 4px 10px; font-size: 0.8em; }
+.btn-danger { background: rgba(233,69,96,0.15); color: var(--accent); border: 1px solid rgba(233,69,96,0.3); }
+.btn-danger:hover { background: rgba(233,69,96,0.25); }
+.contest-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--table-row-border); font-size: 0.85em; }
+.delta.positive { color: var(--green); }
+.delta.negative { color: var(--accent); }
+
+
+
+.data-actions { display: flex; gap: 8px; align-items: center; }
+
+.theme-selector { position: relative; }
+.theme-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.8em; font-weight: 500; display: flex; align-items: center; gap: 6px; transition: all .2s; }
+.theme-btn:hover { border-color: var(--accent); }
+.theme-btn .theme-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--border); }
+.theme-dropdown { position: absolute; top: calc(100% + 6px); right: 0; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 6px 0; min-width: 180px; z-index: 1000; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.theme-dropdown.open { display: block; }
+.theme-option { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; font-size: 0.82em; color: var(--text-dim); transition: all .15s; }
+.theme-option:hover { background: var(--hover-overlay); color: var(--text); }
+.theme-option.active { color: var(--accent); font-weight: 600; }
+.theme-option .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0; }
+.theme-option.active .dot { border-color: var(--accent); box-shadow: inset 0 0 0 3px var(--accent); }
+.theme-option .swatch { display: flex; gap: 3px; margin-left: auto; }
+.theme-option .swatch span { width: 8px; height: 8px; border-radius: 2px; }
+
+.random-btn { background: var(--purple); color: white; border: none; padding: 5px 14px; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: all .2s; }
+.random-btn:hover { opacity: 0.85; transform: scale(1.03); }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; max-width: 520px; width: 90%; box-shadow: 0 12px 40px rgba(0,0,0,0.5); animation: modalIn .2s ease-out; }
+@keyframes modalIn { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal h2 { font-size: 1.1em; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.modal .random-phase-filter { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.modal .rp-btn { padding: 5px 12px; border-radius: 14px; cursor: pointer; font-size: 0.8em; font-weight: 500; border: 1px solid var(--border); background: var(--bg); color: var(--text-dim); transition: all .2s; }
+.modal .rp-btn:hover { border-color: var(--accent); color: var(--text); }
+.modal .rp-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+.random-result { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px; margin-bottom: 16px; }
+.random-result .rr-name { font-size: 1em; font-weight: 600; margin-bottom: 6px; }
+.random-result .rr-meta { font-size: 0.82em; color: var(--text-dim); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+.random-result .rr-phase { font-size: 0.78em; color: var(--purple); font-weight: 500; }
+.random-result .rr-topic { font-size: 0.78em; color: var(--yellow); }
+.random-empty { color: var(--text-dim); font-size: 0.9em; padding: 20px 0; text-align: center; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-actions .btn { min-width: 90px; text-align: center; }
+
+@media (max-width: 768px) {
+  .header { flex-direction: column; gap: 12px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .contest-form { flex-direction: column; }
+  .bar-label { min-width: 100px; font-size: 0.78em; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>&#127919; CF <span>Candidate Master</span> Tracker</h1>
+  <div class="data-actions">
+    <button class="random-btn" onclick="openRandomModal()">&#127922; Random</button>
+    <button class="btn btn-primary btn-sm" onclick="exportData()">Export Data</button>
+    <button class="btn btn-sm btn-danger" onclick="document.getElementById('importFile').click()">Import Data</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)" />
+  </div>
+  <div class="theme-selector">
+    <button class="theme-btn" onclick="toggleThemeDropdown()" id="themeBtn">
+      <span class="theme-dot" id="themeDot"></span>
+      <span id="themeName">Midnight</span> ▾
+    </button>
+    <div class="theme-dropdown" id="themeDropdown"></div>
+  </div>
+  <div class="header-stats">
+    <div class="header-stat"><div class="val" id="h-solved">0</div><div class="label">Solved</div></div>
+    <div class="header-stat"><div class="val" id="h-phase">1</div><div class="label">Phase</div></div>
+    <div class="header-stat"><div class="val" id="h-rating">&mdash;</div><div class="label">Rating</div></div>
+    <div class="header-stat"><div class="val" id="h-pct">0%</div><div class="label">Overall</div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="problems">Problems</div>
+  <div class="tab" data-tab="progress">Progress</div>
+  <div class="tab" data-tab="contests">Contests</div>
+</div>
+
+<div class="content">
+<div class="page active" id="page-problems">
+  <div class="phase-tabs" id="phaseTabs"></div>
+  <div id="problemsContainer"></div>
+</div>
+
+<div class="page" id="page-progress">
+  <div class="stats-grid" id="statsGrid"></div>
+  <div id="phaseProgressCards"></div>
+</div>
+
+<div class="page" id="page-contests">
+  <div class="contest-log">
+    <h3>Log Contest Result</h3>
+    <div class="contest-form">
+      <input type="date" id="c-date" />
+      <input type="text" id="c-name" placeholder="Contest name" style="min-width:200px" />
+      <input type="number" id="c-before" placeholder="Before" style="width:80px" />
+      <input type="number" id="c-after" placeholder="After" style="width:80px" />
+      <input type="text" id="c-solved" placeholder="Solved (A,B,C)" style="width:120px" />
+      <input type="text" id="c-notes" placeholder="Notes" style="min-width:160px" />
+      <button class="btn btn-primary" onclick="addContest()">Add</button>
+    </div>
+    <div id="contestList"></div>
+  </div>
+</div>
+</div>
+
+<div class="modal-overlay" id="randomModal" onclick="if(event.target===this)closeRandomModal()">
+  <div class="modal">
+    <h2>&#127922; Random Question</h2>
+    <div class="random-phase-filter" id="randomPhaseFilter"></div>
+    <div id="randomResult"></div>
+    <div class="modal-actions">
+      <button class="btn btn-sm" style="background:var(--border);color:var(--text)" onclick="closeRandomModal()">Close</button>
+      <button class="btn btn-primary btn-sm" onclick="pickRandom()">&#9861; Re-roll</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  DATA: All 5 phases, topics, guides, and problems
+// ═══════════════════════════════════════════════════════════
+const PHASES = [
+  {
+    id: 1, name: "Phase 1: Foundations", rating: "800-1000", target: "~1200",
+    topics: [
+      {
+        name: "Sheet C1 \u2014 800 Rated", guide: null,
+        problems: [
+          {id:"c1-1",name:"CF 4A \u2014 Watermelon",link:"https://codeforces.com/problemset/problem/4/A",rating:800,tags:["math","parity"],done:true,insight:"Even check, w > 2"},
+          {id:"c1-2",name:"CF 158A \u2014 Next Round",link:"https://codeforces.com/problemset/problem/158/A",rating:800,tags:["impl"],done:true,insight:"Threshold filtering"},
+          {id:"c1-3",name:"CF 71A \u2014 Way Too Long Words",link:"https://codeforces.com/problemset/problem/71/A",rating:800,tags:["strings"],done:true,insight:"Length > 10 abbreviate"},
+          {id:"c1-4",name:"CF 231A \u2014 Team",link:"https://codeforces.com/problemset/problem/231/A",rating:800,tags:["greedy"],done:true,insight:"Count rows sum \u2265 2"},
+          {id:"c1-5",name:"CF 282A \u2014 Bit++",link:"https://codeforces.com/problemset/problem/282/A",rating:800,tags:["impl"],done:true,insight:"++ or -- based on char"},
+          {id:"c1-6",name:"CF 263A \u2014 Beautiful Matrix",link:"https://codeforces.com/problemset/problem/263/A",rating:800,tags:["impl"],done:true,insight:"Manhattan distance"},
+          {id:"c1-7",name:"CF 50A \u2014 Domino Piling",link:"https://codeforces.com/problemset/problem/50/A",rating:800,tags:["math"],done:true,insight:"m*n/2"},
+          {id:"c1-8",name:"CF 339A \u2014 Helpful Maths",link:"https://codeforces.com/problemset/problem/339/A",rating:800,tags:["sorting","strings"]},
+          {id:"c1-9",name:"CF 281A \u2014 Word",link:"https://codeforces.com/problemset/problem/281/A",rating:800,tags:["strings"]},
+          {id:"c1-10",name:"CF 266A \u2014 Stones on the Table",link:"https://codeforces.com/problemset/problem/266/A",rating:800,tags:["impl"]},
+          {id:"c1-11",name:"CF 118A \u2014 String Task",link:"https://codeforces.com/problemset/problem/118/A",rating:800,tags:["strings"]},
+          {id:"c1-12",name:"CF 96A \u2014 Football",link:"https://codeforces.com/problemset/problem/96/A",rating:800,tags:["strings"]},
+          {id:"c1-13",name:"CF 112A \u2014 Petya and Strings",link:"https://codeforces.com/problemset/problem/112/A",rating:800,tags:["strings"]},
+          {id:"c1-14",name:"CF 443A \u2014 Anton and Letters",link:"https://codeforces.com/problemset/problem/443/A",rating:800,tags:["impl","set"]},
+          {id:"c1-15",name:"CF 236A \u2014 Boy or Girl",link:"https://codeforces.com/problemset/problem/236/A",rating:800,tags:["impl"]},
+          {id:"c1-16",name:"CF 1A \u2014 Theatre Square",link:"https://codeforces.com/problemset/problem/1/A",rating:800,tags:["math"]},
+          {id:"c1-17",name:"CF 122A \u2014 Lucky Division",link:"https://codeforces.com/problemset/problem/122/A",rating:800,tags:["math","brute force"]},
+          {id:"c1-18",name:"CF 148A \u2014 Insomnia Cure",link:"https://codeforces.com/problemset/problem/148/A",rating:800,tags:["math"]},
+          {id:"c1-19",name:"CF 469A \u2014 I Wanna Be the Guy",link:"https://codeforces.com/problemset/problem/469/A",rating:800,tags:["impl","set"]},
+          {id:"c1-20",name:"CF 510A \u2014 Fox and Snake",link:"https://codeforces.com/problemset/problem/510/A",rating:800,tags:["impl"]}
+        ]
+      },
+      {
+        name: "Sheet C2 \u2014 900 Rated", guide: null,
+        problems: [
+          {id:"c2-1",name:"CF 1352A \u2014 Sum of Round Numbers",link:"https://codeforces.com/problemset/problem/1352/A",rating:900,tags:["impl","math"]},
+          {id:"c2-2",name:"CF 1350A \u2014 Orac and Factors",link:"https://codeforces.com/problemset/problem/1350/A",rating:900,tags:["math"]},
+          {id:"c2-3",name:"CF 1343A \u2014 Candies",link:"https://codeforces.com/problemset/problem/1343/A",rating:900,tags:["math"]},
+          {id:"c2-4",name:"CF 1328A \u2014 Divisibility Problem",link:"https://codeforces.com/problemset/problem/1328/A",rating:900,tags:["math"]},
+          {id:"c2-5",name:"CF 1313A \u2014 Fast Food Restaurant",link:"https://codeforces.com/problemset/problem/1313/A",rating:900,tags:["greedy"]},
+          {id:"c2-6",name:"CF 1296A \u2014 Array with Odd Sum",link:"https://codeforces.com/problemset/problem/1296/A",rating:900,tags:["math","constructive"]},
+          {id:"c2-7",name:"CF 1288A \u2014 Deadline",link:"https://codeforces.com/problemset/problem/1288/A",rating:900,tags:["math","brute force"]},
+          {id:"c2-8",name:"CF 1285A \u2014 Mezo Playing Zoma",link:"https://codeforces.com/problemset/problem/1285/A",rating:900,tags:["greedy"]},
+          {id:"c2-9",name:"CF 1279A \u2014 New Year Garland",link:"https://codeforces.com/problemset/problem/1279/A",rating:900,tags:["math"]},
+          {id:"c2-10",name:"CF 1269A \u2014 Equation",link:"https://codeforces.com/problemset/problem/1269/A",rating:900,tags:["math"]},
+          {id:"c2-11",name:"CF 1263A \u2014 Sweet Problem",link:"https://codeforces.com/problemset/problem/1263/A",rating:900,tags:["math","greedy"]},
+          {id:"c2-12",name:"CF 1256A \u2014 Payment",link:"https://codeforces.com/problemset/problem/1256/A",rating:900,tags:["math"]},
+          {id:"c2-13",name:"CF 1248A \u2014 Integer Points",link:"https://codeforces.com/problemset/problem/1248/A",rating:900,tags:["math"]},
+          {id:"c2-14",name:"CF 1234A \u2014 Equalize Prices Again",link:"https://codeforces.com/problemset/problem/1234/A",rating:900,tags:["math"]},
+          {id:"c2-15",name:"CF 1228A \u2014 Distinct Digits",link:"https://codeforces.com/problemset/problem/1228/A",rating:900,tags:["brute force"]},
+          {id:"c2-16",name:"CF 1220A \u2014 Cards",link:"https://codeforces.com/problemset/problem/1220/A",rating:900,tags:["greedy","sorting"]},
+          {id:"c2-17",name:"CF 1197A \u2014 DIY Wooden Ladder",link:"https://codeforces.com/problemset/problem/1197/A",rating:900,tags:["greedy","sorting"]},
+          {id:"c2-18",name:"CF 1176A \u2014 Divide It!",link:"https://codeforces.com/problemset/problem/1176/A",rating:900,tags:["impl"]},
+          {id:"c2-19",name:"CF 1165A \u2014 Remainder",link:"https://codeforces.com/problemset/problem/1165/A",rating:900,tags:["constructive"]},
+          {id:"c2-20",name:"CF 1154A \u2014 Restoring Three Numbers",link:"https://codeforces.com/problemset/problem/1154/A",rating:900,tags:["math"]}
+        ]
+      },
+      {
+        name: "Sheet C3 \u2014 1000 Rated", guide: null,
+        problems: [
+          {id:"c3-1",name:"CF 1352B \u2014 Same Parity Summands",link:"https://codeforces.com/problemset/problem/1352/B",rating:1000,tags:["constructive","math"]},
+          {id:"c3-2",name:"CF 1350B \u2014 Arithmetic Progressions",link:"https://codeforces.com/problemset/problem/1350/B",rating:1000,tags:["sorting","math"]},
+          {id:"c3-3",name:"CF 1343B \u2014 Balanced Array",link:"https://codeforces.com/problemset/problem/1343/B",rating:1000,tags:["constructive"]},
+          {id:"c3-4",name:"CF 1328B \u2014 K-th Beautiful String",link:"https://codeforces.com/problemset/problem/1328/B",rating:1000,tags:["constructive","math"]},
+          {id:"c3-5",name:"CF 1313B \u2014 Different Rules",link:"https://codeforces.com/problemset/problem/1313/B",rating:1000,tags:["math","constructive"]},
+          {id:"c3-6",name:"CF 1296B \u2014 Food Buying",link:"https://codeforces.com/problemset/problem/1296/B",rating:1000,tags:["math","greedy"]},
+          {id:"c3-7",name:"CF 1288B \u2014 Yet Another Meme Problem",link:"https://codeforces.com/problemset/problem/1288/B",rating:1000,tags:["math"]},
+          {id:"c3-8",name:"CF 1285B \u2014 Just Eat It!",link:"https://codeforces.com/problemset/problem/1285/B",rating:1000,tags:["dp","greedy"]},
+          {id:"c3-9",name:"CF 1272B \u2014 Snow Walking Robot",link:"https://codeforces.com/problemset/problem/1272/B",rating:1000,tags:["constructive","greedy"]},
+          {id:"c3-10",name:"CF 1269B \u2014 Modular Equations",link:"https://codeforces.com/problemset/problem/1269/B",rating:1000,tags:["math"]},
+          {id:"c3-11",name:"CF 1263B \u2014 PIN Codes",link:"https://codeforces.com/problemset/problem/1263/B",rating:1000,tags:["greedy","impl"]},
+          {id:"c3-12",name:"CF 1256B \u2014 Minimize the Permutation",link:"https://codeforces.com/problemset/problem/1256/B",rating:1000,tags:["greedy"]},
+          {id:"c3-13",name:"CF 1248B \u2014 Grow The Tree",link:"https://codeforces.com/problemset/problem/1248/B",rating:1000,tags:["greedy","math"]},
+          {id:"c3-14",name:"CF 1234B \u2014 Social Network",link:"https://codeforces.com/problemset/problem/1234/B",rating:1000,tags:["impl","deque"]},
+          {id:"c3-15",name:"CF 1228B \u2014 Filling the Grid",link:"https://codeforces.com/problemset/problem/1228/B",rating:1000,tags:["impl","math"]},
+          {id:"c3-16",name:"CF 1220B \u2014 Multiplication Table",link:"https://codeforces.com/problemset/problem/1220/B",rating:1000,tags:["math","constructive"]},
+          {id:"c3-17",name:"CF 1197B \u2014 Pillars",link:"https://codeforces.com/problemset/problem/1197/B",rating:1000,tags:["greedy","impl"]},
+          {id:"c3-18",name:"CF 1176B \u2014 Merge It!",link:"https://codeforces.com/problemset/problem/1176/B",rating:1000,tags:["math"]},
+          {id:"c3-19",name:"CF 1165B \u2014 Polycarp Training",link:"https://codeforces.com/problemset/problem/1165/B",rating:1000,tags:["greedy","sorting"]},
+          {id:"c3-20",name:"CF 1154B \u2014 Make Them Equal",link:"https://codeforces.com/problemset/problem/1154/B",rating:1000,tags:["brute force"]}
+        ]
+      },
+      {
+        name: "Constructive Drills",
+        guide: {title:"Constructive Algorithms",points:["Build valid answer satisfying constraints","Try small cases (n=1,2,3), find pattern, generalize","Check impossibility via invariants (parity, count, sum)","Permutation construction: try zigzag [n,1,n-1,2,...]","If 'impossible': usually parity or count invariant"]},
+        problems: [
+          {id:"con-1",name:"CF 1809A \u2014 Garland",link:"https://codeforces.com/problemset/problem/1809/A",rating:800,tags:["constructive"]},
+          {id:"con-2",name:"CF 1807B \u2014 Grab the Candies",link:"https://codeforces.com/problemset/problem/1807/B",rating:800,tags:["constructive"]},
+          {id:"con-3",name:"CF 1807C \u2014 Find & Replace",link:"https://codeforces.com/problemset/problem/1807/C",rating:800,tags:["constructive"]},
+          {id:"con-4",name:"CF 1791C \u2014 Prepend and Append",link:"https://codeforces.com/problemset/problem/1791/C",rating:800,tags:["constructive"]},
+          {id:"con-5",name:"CF 1788A \u2014 One and Two",link:"https://codeforces.com/problemset/problem/1788/A",rating:800,tags:["constructive"]},
+          {id:"con-6",name:"CF 1832B \u2014 Maximum Sum",link:"https://codeforces.com/problemset/problem/1832/B",rating:900,tags:["constructive"]},
+          {id:"con-7",name:"CF 1829C \u2014 Mr. Perfectly Fine",link:"https://codeforces.com/problemset/problem/1829/C",rating:900,tags:["constructive"]},
+          {id:"con-8",name:"CF 1825A \u2014 Floating Islands",link:"https://codeforces.com/problemset/problem/1825/A",rating:900,tags:["constructive"]},
+          {id:"con-9",name:"CF 1811B \u2014 Conveyor Belts",link:"https://codeforces.com/problemset/problem/1811/B",rating:1000,tags:["constructive"]},
+          {id:"con-10",name:"CF 1800B \u2014 Count the Pairs",link:"https://codeforces.com/problemset/problem/1800/B",rating:1000,tags:["constructive"]},
+          {id:"con-11",name:"CF 1794B \u2014 Not Dividing",link:"https://codeforces.com/problemset/problem/1794/B",rating:1000,tags:["constructive"]},
+          {id:"con-12",name:"CF 1793B \u2014 Fedya and Array",link:"https://codeforces.com/problemset/problem/1793/B",rating:1100,tags:["constructive"]},
+          {id:"con-13",name:"CF 1790C \u2014 Premutation",link:"https://codeforces.com/problemset/problem/1790/C",rating:1100,tags:["constructive"]},
+          {id:"con-14",name:"CF 1786A2 \u2014 Non-alternating Deck",link:"https://codeforces.com/problemset/problem/1786/A2",rating:1100,tags:["constructive"]},
+          {id:"con-15",name:"CF 1783B \u2014 Matrix of Differences",link:"https://codeforces.com/problemset/problem/1783/B",rating:1100,tags:["constructive"]}
+        ]
+      },
+      {
+        name: "Greedy Drills",
+        guide: {title:"Greedy Algorithms",points:["Sort first, then choose \u2014 most greedy starts with sorting","Always pick the best available at each step","Exchange argument: assume optimal differs, show swap doesn't help","Interval scheduling: sort by end time, pick non-overlapping","Pair matching: sort, pair first\u2194last or adjacent"]},
+        problems: [
+          {id:"gre-1",name:"CF 1807A \u2014 Plus or Minus",link:"https://codeforces.com/problemset/problem/1807/A",rating:800,tags:["greedy"]},
+          {id:"gre-2",name:"CF 1829A \u2014 Love Story",link:"https://codeforces.com/problemset/problem/1829/A",rating:800,tags:["greedy"]},
+          {id:"gre-3",name:"CF 1825B \u2014 LuoTianyi and the Show",link:"https://codeforces.com/problemset/problem/1825/B",rating:800,tags:["greedy"]},
+          {id:"gre-4",name:"CF 1809B \u2014 Points on Plane",link:"https://codeforces.com/problemset/problem/1809/B",rating:800,tags:["greedy"]},
+          {id:"gre-5",name:"CF 1791B \u2014 Following Directions",link:"https://codeforces.com/problemset/problem/1791/B",rating:800,tags:["greedy"]},
+          {id:"gre-6",name:"CF 1838A \u2014 Blackboard List",link:"https://codeforces.com/problemset/problem/1838/A",rating:900,tags:["greedy"]},
+          {id:"gre-7",name:"CF 1833B \u2014 Restore the Weather",link:"https://codeforces.com/problemset/problem/1833/B",rating:900,tags:["greedy"]},
+          {id:"gre-8",name:"CF 1827A \u2014 Counting Orders",link:"https://codeforces.com/problemset/problem/1827/A",rating:900,tags:["greedy"]},
+          {id:"gre-9",name:"CF 1810B \u2014 Candies",link:"https://codeforces.com/problemset/problem/1810/B",rating:1000,tags:["greedy"]},
+          {id:"gre-10",name:"CF 1807D \u2014 Odd Queries",link:"https://codeforces.com/problemset/problem/1807/D",rating:1000,tags:["greedy"]},
+          {id:"gre-11",name:"CF 1798A \u2014 Showstopper",link:"https://codeforces.com/problemset/problem/1798/A",rating:1000,tags:["greedy"]},
+          {id:"gre-12",name:"CF 1795B \u2014 Ideal Point",link:"https://codeforces.com/problemset/problem/1795/B",rating:1000,tags:["greedy"]},
+          {id:"gre-13",name:"CF 1792B \u2014 Stand-up Comedy",link:"https://codeforces.com/problemset/problem/1792/B",rating:1100,tags:["greedy"]},
+          {id:"gre-14",name:"CF 1789B \u2014 Serval and Toy Bricks",link:"https://codeforces.com/problemset/problem/1789/B",rating:1100,tags:["greedy"]},
+          {id:"gre-15",name:"CF 1783A \u2014 Make It Beautiful",link:"https://codeforces.com/problemset/problem/1783/A",rating:1100,tags:["greedy"]}
+        ]
+      },
+      {
+        name: "Sorting Drills",
+        guide: {title:"Sorting",points:["Arrays.sort(a) \u2014 O(N log N). Use Integer.compare() not a-b","Custom: (a,b) -> Integer.compare(a[1], b[1])","Coordinate compression: map large values to 0..n-1","Median minimizes sum of absolute differences","Sort + linear scan for patterns (dupes, closest pair)"]},
+        problems: [
+          {id:"sor-1",name:"CF 1829B \u2014 Blank Space",link:"https://codeforces.com/problemset/problem/1829/B",rating:900,tags:["sorting"]},
+          {id:"sor-2",name:"CF 1833A \u2014 Musical Puzzle",link:"https://codeforces.com/problemset/problem/1833/A",rating:900,tags:["sorting"]},
+          {id:"sor-3",name:"CF 1811A \u2014 Insert Digit",link:"https://codeforces.com/problemset/problem/1811/A",rating:900,tags:["sorting"]},
+          {id:"sor-4",name:"CF 1807C \u2014 Find & Replace",link:"https://codeforces.com/problemset/problem/1807/C",rating:900,tags:["sorting"]},
+          {id:"sor-5",name:"CF 1800A \u2014 Is It a Cat?",link:"https://codeforces.com/problemset/problem/1800/A",rating:900,tags:["sorting"]},
+          {id:"sor-6",name:"CF 1794A \u2014 Prefix & Suffix Array",link:"https://codeforces.com/problemset/problem/1794/A",rating:1000,tags:["sorting"]},
+          {id:"sor-7",name:"CF 1810A \u2014 Beautiful Sequence",link:"https://codeforces.com/problemset/problem/1810/A",rating:1000,tags:["sorting"]},
+          {id:"sor-8",name:"CF 1798B \u2014 Three Sevens",link:"https://codeforces.com/problemset/problem/1798/B",rating:1000,tags:["sorting"]},
+          {id:"sor-9",name:"CF 1793A \u2014 Yet Another Promotion",link:"https://codeforces.com/problemset/problem/1793/A",rating:1100,tags:["sorting"]},
+          {id:"sor-10",name:"CF 1791D \u2014 Matryoshkas",link:"https://codeforces.com/problemset/problem/1791/D",rating:1100,tags:["sorting"]}
+        ]
+      },
+      {
+        name: "Math Drills",
+        guide: {title:"Math Patterns",points:["GCD: gcd(a,b) = gcd(b, a%b). LCM = a/gcd(a,b)*b","Ceil division: (a + b - 1) / b","Divisors in O(\u221aN): loop i=1..\u221an, add i and n/i","(a-b)%m = ((a%m)-(b%m)+m)%m \u2014 add m for negative","Sum 1..n = n*(n+1)/2. Parity of sum = parity of odd count"]},
+        problems: [
+          {id:"mat-1",name:"CF 1807A \u2014 Plus or Minus",link:"https://codeforces.com/problemset/problem/1807/A",rating:800,tags:["math"]},
+          {id:"mat-2",name:"CF 1829A \u2014 Love Story",link:"https://codeforces.com/problemset/problem/1829/A",rating:800,tags:["math"]},
+          {id:"mat-3",name:"CF 1809A \u2014 Garland",link:"https://codeforces.com/problemset/problem/1809/A",rating:800,tags:["math"]},
+          {id:"mat-4",name:"CF 1791A \u2014 Codeforces Checking",link:"https://codeforces.com/problemset/problem/1791/A",rating:800,tags:["math"]},
+          {id:"mat-5",name:"CF 1788A \u2014 One and Two",link:"https://codeforces.com/problemset/problem/1788/A",rating:800,tags:["math"]},
+          {id:"mat-6",name:"CF 1833B \u2014 Restore the Weather",link:"https://codeforces.com/problemset/problem/1833/B",rating:900,tags:["math"]},
+          {id:"mat-7",name:"CF 1832A \u2014 New Palindrome",link:"https://codeforces.com/problemset/problem/1832/A",rating:900,tags:["math"]},
+          {id:"mat-8",name:"CF 1811A \u2014 Insert Digit",link:"https://codeforces.com/problemset/problem/1811/A",rating:900,tags:["math"]},
+          {id:"mat-9",name:"CF 1800C \u2014 Powering the Hero",link:"https://codeforces.com/problemset/problem/1800/C",rating:1000,tags:["math"]},
+          {id:"mat-10",name:"CF 1798A \u2014 Showstopper",link:"https://codeforces.com/problemset/problem/1798/A",rating:1000,tags:["math"]},
+          {id:"mat-11",name:"CF 1795A \u2014 Two Towers",link:"https://codeforces.com/problemset/problem/1795/A",rating:1000,tags:["math"]},
+          {id:"mat-12",name:"CF 1794A \u2014 Prefix & Suffix Array",link:"https://codeforces.com/problemset/problem/1794/A",rating:1000,tags:["math"]},
+          {id:"mat-13",name:"CF 1793A \u2014 Yet Another Promotion",link:"https://codeforces.com/problemset/problem/1793/A",rating:1100,tags:["math"]},
+          {id:"mat-14",name:"CF 1790B \u2014 Taisia and Dice",link:"https://codeforces.com/problemset/problem/1790/B",rating:1100,tags:["math"]},
+          {id:"mat-15",name:"CF 1789A \u2014 Serval and Mocha's Array",link:"https://codeforces.com/problemset/problem/1789/A",rating:1100,tags:["math"]}
+        ]
+      }
+    ]
+  },
+  {
+    id: 2, name: "Phase 2: Toolkit", rating: "1100-1500", target: "~1500",
+    topics: [
+      {name:"Binary Search on Answer",guide:{title:"Binary Search",points:["'Can we achieve X?' \u2192 binary search X, check feasibility","Minimize-max: feasible(mid) \u2192 hi=mid, else lo=mid+1","Maximize-min: feasible(mid) \u2192 lo=mid, else hi=mid-1","Template: lo=min, hi=max, while(lo<hi)","Feasibility check is usually greedy or simulation"]},problems:[
+        {id:"bs-1",name:"CF 1623B \u2014 Game on Ranges",link:"https://codeforces.com/problemset/problem/1623/B",rating:1100,tags:["binary search"]},
+        {id:"bs-2",name:"CF 1612C \u2014 Chat Ban",link:"https://codeforces.com/problemset/problem/1612/C",rating:1300,tags:["binary search","math"]},
+        {id:"bs-3",name:"CF 1555C \u2014 Coin Rows",link:"https://codeforces.com/problemset/problem/1555/C",rating:1300,tags:["binary search","dp"]},
+        {id:"bs-4",name:"CF 1486C2 \u2014 Guessing the Greatest",link:"https://codeforces.com/problemset/problem/1486/C2",rating:1400,tags:["binary search","interactive"]},
+        {id:"bs-5",name:"CF 1462D \u2014 Add to Neighbour",link:"https://codeforces.com/problemset/problem/1462/D",rating:1400,tags:["binary search","greedy"]}
+      ]},
+      {name:"Two Pointers",guide:{title:"Two Pointers",points:["Opposite ends: sorted array, pair sum = target","Same direction: sliding window for subarray conditions","Shrink/expand: while violated, move left pointer","Both pointers only move forward \u2192 O(N)"]},problems:[
+        {id:"tp-1",name:"CF 1462C \u2014 Unique Number",link:"https://codeforces.com/problemset/problem/1462/C",rating:1100,tags:["two pointers"]},
+        {id:"tp-2",name:"CF 1538C \u2014 Number of Pairs",link:"https://codeforces.com/problemset/problem/1538/C",rating:1300,tags:["two pointers","sorting"]},
+        {id:"tp-3",name:"CF 1520D \u2014 Same Differences",link:"https://codeforces.com/problemset/problem/1520/D",rating:1200,tags:["two pointers","math"]},
+        {id:"tp-4",name:"CF 1468D \u2014 Firecrackers",link:"https://codeforces.com/problemset/problem/1468/D",rating:1400,tags:["two pointers","binary search"]},
+        {id:"tp-5",name:"CF 1409D \u2014 Decrease the Sum",link:"https://codeforces.com/problemset/problem/1409/D",rating:1300,tags:["two pointers","greedy"]}
+      ]},
+      {name:"Prefix Sums",guide:{title:"Prefix Sums",points:["pre[i+1]=pre[i]+a[i]; sum a[l..r]=pre[r+1]-pre[l]","Difference array: diff[l]+=v, diff[r+1]-=v, then prefix sum","Kadane's: max subarray sum O(N)","Subarray sum=K: HashMap of prefix sums"]},problems:[
+        {id:"ps-1",name:"CF 1398C \u2014 Good Subarrays",link:"https://codeforces.com/problemset/problem/1398/C",rating:1200,tags:["prefix sums"]},
+        {id:"ps-2",name:"CF 1520E \u2014 Arranging The Sheep",link:"https://codeforces.com/problemset/problem/1520/E",rating:1400,tags:["prefix sums","greedy"]},
+        {id:"ps-3",name:"CF 1480B \u2014 The Great Hero",link:"https://codeforces.com/problemset/problem/1480/B",rating:1200,tags:["prefix sums"]},
+        {id:"ps-4",name:"CF 1426D \u2014 Non-zero Segments",link:"https://codeforces.com/problemset/problem/1426/D",rating:1300,tags:["prefix sums"]},
+        {id:"ps-5",name:"CF 1374D \u2014 Zero Remainder Array",link:"https://codeforces.com/problemset/problem/1374/D",rating:1400,tags:["prefix sums","hashing"]}
+      ]},
+      {name:"Hashing & Freq Maps",guide:{title:"Hashing",points:["HashMap for counting, HashSet for membership","Frequency array int[26] for lowercase chars","Two-sum: store complement in set","Count pairs: add freq[target-a[i]] before updating"]},problems:[
+        {id:"hm-1",name:"CF 1520D \u2014 Same Differences",link:"https://codeforces.com/problemset/problem/1520/D",rating:1200,tags:["hashing"]},
+        {id:"hm-2",name:"CF 1512D \u2014 Corrupted Array",link:"https://codeforces.com/problemset/problem/1512/D",rating:1200,tags:["hashing","sorting"]},
+        {id:"hm-3",name:"CF 1447C \u2014 Knapsack",link:"https://codeforces.com/problemset/problem/1447/C",rating:1300,tags:["hashing","greedy"]},
+        {id:"hm-4",name:"CF 1409C \u2014 Yet Another Array Restoration",link:"https://codeforces.com/problemset/problem/1409/C",rating:1200,tags:["hashing","math"]},
+        {id:"hm-5",name:"CF 1371D \u2014 Grid-00100",link:"https://codeforces.com/problemset/problem/1371/D",rating:1300,tags:["constructive"]}
+      ]},
+      {name:"Bit Manipulation",guide:{title:"Bits",points:["a^a=0, a^0=a \u2014 XOR is its own inverse","a&(a-1) removes lowest set bit","Integer.bitCount(mask) \u2014 popcount","Subsets: for(s=mask;s>0;s=(s-1)&mask)"]},problems:[
+        {id:"bit-1",name:"CF 1527A \u2014 And Then There Were K",link:"https://codeforces.com/problemset/problem/1527/A",rating:800,tags:["bitmasks"]},
+        {id:"bit-2",name:"CF 1490C \u2014 Sum of Cubes",link:"https://codeforces.com/problemset/problem/1490/C",rating:1100,tags:["bitmasks","math"]},
+        {id:"bit-3",name:"CF 1451C \u2014 String Equality",link:"https://codeforces.com/problemset/problem/1451/C",rating:1200,tags:["bitmasks"]},
+        {id:"bit-4",name:"CF 1395A \u2014 Boboniu Color Balls",link:"https://codeforces.com/problemset/problem/1395/A",rating:1200,tags:["bitmasks","math"]},
+        {id:"bit-5",name:"CF 1365C \u2014 Rotation Matching",link:"https://codeforces.com/problemset/problem/1365/C",rating:1300,tags:["bitmasks","hashing"]}
+      ]}
+    ]
+  },
+  {
+    id: 3, name: "Phase 3: Core Patterns", rating: "1300-1700", target: "~1700",
+    topics: [
+      {name:"Basic DP",guide:{title:"Dynamic Programming",points:["Define STATE: what does dp[i] represent?","TRANSITIONS: dp[i] from dp[i-1], dp[i-2], etc.","1D DP: fibonacci, house robber, climb stairs","Knapsack: dp[i][w] = max(dp[i-1][w], dp[i-1][w-wi]+vi)","LIS O(N log N): tails array + binary search"]},problems:[
+        {id:"dp-1",name:"CF 455A \u2014 Boredom",link:"https://codeforces.com/problemset/problem/455/A",rating:1500,tags:["dp"]},
+        {id:"dp-2",name:"CF 1560D \u2014 Make a Power of Two",link:"https://codeforces.com/problemset/problem/1560/D",rating:1400,tags:["dp","greedy"]},
+        {id:"dp-3",name:"CF 1398C \u2014 Good Subarrays",link:"https://codeforces.com/problemset/problem/1398/C",rating:1300,tags:["dp","prefix sums"]},
+        {id:"dp-4",name:"CF 1245C \u2014 Constanze's Machine",link:"https://codeforces.com/problemset/problem/1245/C",rating:1400,tags:["dp"]},
+        {id:"dp-5",name:"CF 1195C \u2014 Basketball Exercise",link:"https://codeforces.com/problemset/problem/1195/C",rating:1400,tags:["dp"]},
+        {id:"dp-6",name:"CF 1183H \u2014 Subsequences (easy)",link:"https://codeforces.com/problemset/problem/1183/H",rating:1400,tags:["dp"]},
+        {id:"dp-7",name:"CF 1077F2 \u2014 Pictures (hard)",link:"https://codeforces.com/problemset/problem/1077/F2",rating:1500,tags:["dp","greedy"]},
+        {id:"dp-8",name:"CF 975C \u2014 Valhalla Siege",link:"https://codeforces.com/problemset/problem/975/C",rating:1400,tags:["dp","prefix sums"]},
+        {id:"dp-9",name:"CF 1301C \u2014 Ayoub's Function",link:"https://codeforces.com/problemset/problem/1301/C",rating:1500,tags:["dp","math"]},
+        {id:"dp-10",name:"CF 1509C \u2014 The Sports Festival",link:"https://codeforces.com/problemset/problem/1509/C",rating:1600,tags:["dp","sorting"]},
+        {id:"dp-11",name:"CF 1353E \u2014 K-periodic Garland",link:"https://codeforces.com/problemset/problem/1353/E",rating:1500,tags:["dp"]},
+        {id:"dp-12",name:"CF 1551D2 \u2014 Domino (hard)",link:"https://codeforces.com/problemset/problem/1551/D2",rating:1600,tags:["dp","constructive"]},
+        {id:"dp-13",name:"CF 1475D \u2014 Cleaning the Phone",link:"https://codeforces.com/problemset/problem/1475/D",rating:1500,tags:["dp","sorting"]},
+        {id:"dp-14",name:"CF 1525C \u2014 Robot Collisions",link:"https://codeforces.com/problemset/problem/1525/C",rating:1600,tags:["dp","greedy"]},
+        {id:"dp-15",name:"CF 1538D \u2014 Another Problem About Dividing Numbers",link:"https://codeforces.com/problemset/problem/1538/D",rating:1500,tags:["dp","math"]}
+      ]},
+      {name:"Graph Fundamentals",guide:{title:"Graphs",points:["Adjacency list: List<List<Integer>>","BFS: shortest path unweighted, O(V+E)","DFS: components, cycles, topological order","Topo sort: Kahn's (in-degree BFS)","Bipartite: 2-color with BFS/DFS"]},problems:[
+        {id:"gr-1",name:"CF 580C \u2014 Kefa and Park",link:"https://codeforces.com/problemset/problem/580/C",rating:1500,tags:["dfs","trees"]},
+        {id:"gr-2",name:"CF 1272D \u2014 Remove One Element",link:"https://codeforces.com/problemset/problem/1272/D",rating:1500,tags:["dfs","dp"]},
+        {id:"gr-3",name:"CF 1037D \u2014 Valid BFS?",link:"https://codeforces.com/problemset/problem/1037/D",rating:1600,tags:["bfs","trees"]},
+        {id:"gr-4",name:"CF 1143C \u2014 Queen",link:"https://codeforces.com/problemset/problem/1143/C",rating:1400,tags:["dfs","trees"]},
+        {id:"gr-5",name:"CF 1213D \u2014 Equalizing by Division",link:"https://codeforces.com/problemset/problem/1213/D",rating:1400,tags:["bfs","greedy"]},
+        {id:"gr-6",name:"CF 1324D \u2014 Pair of Topics",link:"https://codeforces.com/problemset/problem/1324/D",rating:1400,tags:["graphs","sorting"]},
+        {id:"gr-7",name:"CF 1294D \u2014 MEX maximizing",link:"https://codeforces.com/problemset/problem/1294/D",rating:1500,tags:["graphs","greedy"]},
+        {id:"gr-8",name:"CF 1092E \u2014 Minimal Diameter Forest",link:"https://codeforces.com/problemset/problem/1092/E",rating:1600,tags:["bfs","trees"]},
+        {id:"gr-9",name:"CF 1144F \u2014 Graph Without Long Directed Paths",link:"https://codeforces.com/problemset/problem/1144/F",rating:1500,tags:["dfs","bipartite"]},
+        {id:"gr-10",name:"CF 1249D \u2014 Too Many Segments",link:"https://codeforces.com/problemset/problem/1249/D",rating:1600,tags:["graphs","greedy"]},
+        {id:"gr-11",name:"CF 1365D \u2014 Solve The Maze",link:"https://codeforces.com/problemset/problem/1365/D",rating:1500,tags:["bfs","impl"]},
+        {id:"gr-12",name:"CF 1559D2 \u2014 Mocha and Diana (Hard)",link:"https://codeforces.com/problemset/problem/1559/D2",rating:1700,tags:["dsu","graphs"]},
+        {id:"gr-13",name:"CF 1360F \u2014 Spy Detective",link:"https://codeforces.com/problemset/problem/1360/F",rating:1500,tags:["dfs","graphs"]},
+        {id:"gr-14",name:"CF 1176E \u2014 Cover it!",link:"https://codeforces.com/problemset/problem/1176/E",rating:1500,tags:["bfs","bipartite"]},
+        {id:"gr-15",name:"CF 1294F \u2014 Three Paths on a Tree",link:"https://codeforces.com/problemset/problem/1294/F",rating:1700,tags:["bfs","trees","diameter"]}
+      ]},
+      {name:"Number Theory",guide:{title:"Number Theory",points:["Sieve of Eratosthenes O(N log log N)","Fast exp O(log exp)","Mod inverse: a^(p-2) mod p (Fermat's)","nCr mod p: precompute fact[] and inv_fact[]"]},problems:[
+        {id:"nt-1",name:"CF 1294C \u2014 Product of Three Numbers",link:"https://codeforces.com/problemset/problem/1294/C",rating:1300,tags:["number theory","math"]},
+        {id:"nt-2",name:"CF 1352G \u2014 Special Permutation",link:"https://codeforces.com/problemset/problem/1352/G",rating:1600,tags:["number theory","constructive"]},
+        {id:"nt-3",name:"CF 1475C \u2014 Ball in Berland",link:"https://codeforces.com/problemset/problem/1475/C",rating:1400,tags:["number theory","combinatorics"]},
+        {id:"nt-4",name:"CF 1512G \u2014 Short Task",link:"https://codeforces.com/problemset/problem/1512/G",rating:1600,tags:["number theory","sieve"]},
+        {id:"nt-5",name:"CF 1295D \u2014 Same GCDs",link:"https://codeforces.com/problemset/problem/1295/D",rating:1600,tags:["number theory","euler totient"]},
+        {id:"nt-6",name:"CF 1462E2 \u2014 Close Tuples (hard)",link:"https://codeforces.com/problemset/problem/1462/E2",rating:1500,tags:["number theory","combinatorics"]},
+        {id:"nt-7",name:"CF 1538E \u2014 Funny Substrings",link:"https://codeforces.com/problemset/problem/1538/E",rating:1500,tags:["number theory","impl"]},
+        {id:"nt-8",name:"CF 1370D \u2014 Odd-Even Subsequence",link:"https://codeforces.com/problemset/problem/1370/D",rating:1500,tags:["number theory","binary search"]},
+        {id:"nt-9",name:"CF 1349A \u2014 Orac and LCM",link:"https://codeforces.com/problemset/problem/1349/A",rating:1600,tags:["number theory","gcd"]},
+        {id:"nt-10",name:"CF 1176D \u2014 Recover it!",link:"https://codeforces.com/problemset/problem/1176/D",rating:1600,tags:["number theory","sieve"]},
+        {id:"nt-11",name:"CF 1154G \u2014 Minimum Possible LCM",link:"https://codeforces.com/problemset/problem/1154/G",rating:1700,tags:["number theory","gcd"]},
+        {id:"nt-12",name:"CF 1228C \u2014 Primes and Multiplication",link:"https://codeforces.com/problemset/problem/1228/C",rating:1500,tags:["number theory","math"]},
+        {id:"nt-13",name:"CF 1114C \u2014 Trailing Loves (or L'Eggs?)",link:"https://codeforces.com/problemset/problem/1114/C",rating:1600,tags:["number theory","math"]},
+        {id:"nt-14",name:"CF 1225C \u2014 p-binary",link:"https://codeforces.com/problemset/problem/1225/C",rating:1400,tags:["number theory","bitmasks"]},
+        {id:"nt-15",name:"CF 1203D \u2014 Remove the Substring",link:"https://codeforces.com/problemset/problem/1203/D",rating:1500,tags:["number theory","greedy"]}
+      ]},
+      {name:"Advanced Greedy + Constructive",guide:{title:"Advanced Greedy",points:["Exchange argument with formal proof","Sort by ratio (value/weight)","Multi-step constructions with invariants"]},problems:[
+        {id:"ag-1",name:"CF 1374E2 \u2014 Reading Books (hard)",link:"https://codeforces.com/problemset/problem/1374/E2",rating:1600,tags:["greedy","sorting"]},
+        {id:"ag-2",name:"CF 1433E \u2014 Two Round Dances",link:"https://codeforces.com/problemset/problem/1433/E",rating:1300,tags:["greedy","combinatorics"]},
+        {id:"ag-3",name:"CF 1490F \u2014 Equalize the Array",link:"https://codeforces.com/problemset/problem/1490/F",rating:1500,tags:["greedy","sorting"]},
+        {id:"ag-4",name:"CF 1367D \u2014 Task On The Board",link:"https://codeforces.com/problemset/problem/1367/D",rating:1500,tags:["greedy","constructive"]},
+        {id:"ag-5",name:"CF 1369C \u2014 RBS Brackets",link:"https://codeforces.com/problemset/problem/1369/C",rating:1500,tags:["greedy"]},
+        {id:"ag-6",name:"CF 1385D \u2014 a]b+a]c=a]bc",link:"https://codeforces.com/problemset/problem/1385/D",rating:1500,tags:["constructive","greedy"]},
+        {id:"ag-7",name:"CF 1401D \u2014 Maximum Distributed Tree",link:"https://codeforces.com/problemset/problem/1401/D",rating:1600,tags:["greedy","trees"]},
+        {id:"ag-8",name:"CF 1520F2 \u2014 Guess the K-th Zero (Hard)",link:"https://codeforces.com/problemset/problem/1520/F2",rating:1700,tags:["greedy","binary search"]},
+        {id:"ag-9",name:"CF 1536C \u2014 Diluc and Kaeya",link:"https://codeforces.com/problemset/problem/1536/C",rating:1500,tags:["greedy","hashing"]},
+        {id:"ag-10",name:"CF 1360G \u2014 A Special Trick",link:"https://codeforces.com/problemset/problem/1360/G",rating:1600,tags:["constructive","greedy"]},
+        {id:"ag-11",name:"CF 1406C \u2014 Link Cut Centroids",link:"https://codeforces.com/problemset/problem/1406/C",rating:1700,tags:["constructive","trees"]},
+        {id:"ag-12",name:"CF 1551D1 \u2014 Domino (easy)",link:"https://codeforces.com/problemset/problem/1551/D1",rating:1500,tags:["constructive"]},
+        {id:"ag-13",name:"CF 1418C \u2014 Mortal Kombat Tower",link:"https://codeforces.com/problemset/problem/1418/C",rating:1500,tags:["greedy","dp"]},
+        {id:"ag-14",name:"CF 1399D \u2014 Binary String To Subsequences",link:"https://codeforces.com/problemset/problem/1399/D",rating:1500,tags:["greedy"]},
+        {id:"ag-15",name:"CF 1454E \u2014 Number of Simple Paths",link:"https://codeforces.com/problemset/problem/1454/E",rating:1600,tags:["greedy","trees"]}
+      ]}
+    ]
+  },
+  {
+    id: 4, name: "Phase 4: Advanced", rating: "1500-1900", target: "~1850",
+    topics: [
+      {name:"Advanced DP",guide:{title:"Advanced DP",points:["Bitmask DP: dp[mask], N\u226420","DP on Trees: dp[v] for subtree, rerooting","Interval DP: dp[l][r], try all split points","Digit DP: count numbers \u2264N with property"]},problems:[
+        {id:"adp-1",name:"CF 1367F1 \u2014 Flying Sort (easy)",link:"https://codeforces.com/problemset/problem/1367/F1",rating:1700,tags:["dp","sorting"]},
+        {id:"adp-2",name:"CF 1480C \u2014 Searching Local Minimum",link:"https://codeforces.com/problemset/problem/1480/C",rating:1700,tags:["dp","interactive"]},
+        {id:"adp-3",name:"CF 1426E \u2014 Rock, Paper, Scissors",link:"https://codeforces.com/problemset/problem/1426/E",rating:1800,tags:["dp","math"]},
+        {id:"adp-4",name:"CF 1097C \u2014 Yuhao and a Parenthesis",link:"https://codeforces.com/problemset/problem/1097/C",rating:1700,tags:["dp","greedy"]},
+        {id:"adp-5",name:"CF 1547E \u2014 Air Conditioners",link:"https://codeforces.com/problemset/problem/1547/E",rating:1700,tags:["dp"]},
+        {id:"adp-6",name:"CF 1472F \u2014 New Year's Puzzle",link:"https://codeforces.com/problemset/problem/1472/F",rating:1800,tags:["dp","sorting"]},
+        {id:"adp-7",name:"CF 1407D \u2014 Discrete Centrifugal Jumps",link:"https://codeforces.com/problemset/problem/1407/D",rating:1800,tags:["dp","stack"]},
+        {id:"adp-8",name:"CF 1385E \u2014 Directing Edges",link:"https://codeforces.com/problemset/problem/1385/E",rating:1800,tags:["dp","topo sort"]},
+        {id:"adp-9",name:"CF 1312E \u2014 Array Shrinking",link:"https://codeforces.com/problemset/problem/1312/E",rating:1800,tags:["dp","interval dp"]},
+        {id:"adp-10",name:"CF 1327E \u2014 Count Buildings",link:"https://codeforces.com/problemset/problem/1327/E",rating:1700,tags:["dp","combinatorics"]},
+        {id:"adp-11",name:"CF 1272F \u2014 Two Bracket Sequences",link:"https://codeforces.com/problemset/problem/1272/F",rating:1900,tags:["dp","bfs"]},
+        {id:"adp-12",name:"CF 1437D \u2014 Minimal Height Tree",link:"https://codeforces.com/problemset/problem/1437/D",rating:1700,tags:["dp","trees"]},
+        {id:"adp-13",name:"CF 1324F \u2014 Maximum White Subtree",link:"https://codeforces.com/problemset/problem/1324/F",rating:1800,tags:["dp","trees","rerooting"]},
+        {id:"adp-14",name:"CF 1560E \u2014 Polycarp and Each-of Problem",link:"https://codeforces.com/problemset/problem/1560/E",rating:1700,tags:["dp","bitmask"]},
+        {id:"adp-15",name:"CF 1333D \u2014 Challenges in school",link:"https://codeforces.com/problemset/problem/1333/D",rating:1800,tags:["dp","simulation"]}
+      ]},
+      {name:"Shortest Paths",guide:{title:"Shortest Paths",points:["Dijkstra O((V+E)logV) \u2014 PQ, non-negative","0-1 BFS O(V+E) \u2014 Deque, weights 0/1","Bellman-Ford O(VE) \u2014 negative edges"]},problems:[
+        {id:"sp-1",name:"CF 1360E \u2014 Polygon",link:"https://codeforces.com/problemset/problem/1360/E",rating:1500,tags:["graphs","impl"]},
+        {id:"sp-2",name:"CF 1307C \u2014 Cow and Message",link:"https://codeforces.com/problemset/problem/1307/C",rating:1500,tags:["shortest path","dp"]},
+        {id:"sp-3",name:"CF 1473D \u2014 Program",link:"https://codeforces.com/problemset/problem/1473/D",rating:1700,tags:["shortest path","prefix sums"]},
+        {id:"sp-4",name:"CF 1076D \u2014 Edge Deletion",link:"https://codeforces.com/problemset/problem/1076/D",rating:1800,tags:["dijkstra","greedy"]},
+        {id:"sp-5",name:"CF 1076E \u2014 Vasya and a Tree",link:"https://codeforces.com/problemset/problem/1076/E",rating:1800,tags:["dijkstra","trees"]},
+        {id:"sp-6",name:"CF 1528A \u2014 Parsa's Humongous Tree",link:"https://codeforces.com/problemset/problem/1528/A",rating:1800,tags:["dp","trees"]},
+        {id:"sp-7",name:"CF 1272E \u2014 Nearest Opposite Parity",link:"https://codeforces.com/problemset/problem/1272/E",rating:1700,tags:["bfs","graphs"]},
+        {id:"sp-8",name:"CF 1520G \u2014 To Go or Not To Go?",link:"https://codeforces.com/problemset/problem/1520/G",rating:1800,tags:["bfs","shortest path"]},
+        {id:"sp-9",name:"CF 1301B \u2014 Motarack's Birthday",link:"https://codeforces.com/problemset/problem/1301/B",rating:1500,tags:["bfs","binary search"]},
+        {id:"sp-10",name:"CF 1304D \u2014 Shortest and Longest LIS",link:"https://codeforces.com/problemset/problem/1304/D",rating:1700,tags:["constructive","greedy"]},
+        {id:"sp-11",name:"CF 1243D \u2014 0-1 MST",link:"https://codeforces.com/problemset/problem/1243/D",rating:1800,tags:["bfs","graphs"]},
+        {id:"sp-12",name:"CF 1343E \u2014 Weights Distributing",link:"https://codeforces.com/problemset/problem/1343/E",rating:1800,tags:["bfs","shortest path"]},
+        {id:"sp-13",name:"CF 1567D \u2014 Expression Evaluation",link:"https://codeforces.com/problemset/problem/1567/D",rating:1700,tags:["graphs","greedy"]},
+        {id:"sp-14",name:"CF 1209D \u2014 Cow and Snacks",link:"https://codeforces.com/problemset/problem/1209/D",rating:1700,tags:["dfs","graphs"]},
+        {id:"sp-15",name:"CF 1144G \u2014 Two Merged Sequences",link:"https://codeforces.com/problemset/problem/1144/G",rating:1800,tags:["dp","constructive"]}
+      ]},
+      {name:"Segment Tree / BIT",guide:{title:"Range Queries",points:["BIT: update/query O(logN), 1-indexed","Segment tree: build O(N), query/update O(logN)","Lazy propagation for range updates"]},problems:[
+        {id:"seg-1",name:"CF 1354D \u2014 Multiset",link:"https://codeforces.com/problemset/problem/1354/D",rating:1700,tags:["binary search","bit"]},
+        {id:"seg-2",name:"CF 1409E \u2014 Two Platforms",link:"https://codeforces.com/problemset/problem/1409/E",rating:1700,tags:["sorting","binary search"]},
+        {id:"seg-3",name:"CF 1353F \u2014 Decreasing Heights",link:"https://codeforces.com/problemset/problem/1353/F",rating:1800,tags:["dp"]},
+        {id:"seg-4",name:"CF 1539D \u2014 PriceFixed",link:"https://codeforces.com/problemset/problem/1539/D",rating:1600,tags:["two pointers","sorting"]},
+        {id:"seg-5",name:"CF 276C \u2014 Little Girl and Maximum Sum",link:"https://codeforces.com/problemset/problem/276/C",rating:1500,tags:["prefix sums","sorting"]},
+        {id:"seg-6",name:"CF 1555E \u2014 Boring Segments",link:"https://codeforces.com/problemset/problem/1555/E",rating:1900,tags:["segment tree","two pointers"]},
+        {id:"seg-7",name:"CF 1537E \u2014 Erase and Extend",link:"https://codeforces.com/problemset/problem/1537/E",rating:1600,tags:["greedy","strings"]},
+        {id:"seg-8",name:"CF 1311E \u2014 Construct the Binary Tree",link:"https://codeforces.com/problemset/problem/1311/E",rating:1800,tags:["constructive","trees"]},
+        {id:"seg-9",name:"CF 1497D \u2014 Genius",link:"https://codeforces.com/problemset/problem/1497/D",rating:1800,tags:["dp","bitmask"]},
+        {id:"seg-10",name:"CF 1234D \u2014 Distinct Characters Queries",link:"https://codeforces.com/problemset/problem/1234/D",rating:1500,tags:["bit","impl"]},
+        {id:"seg-11",name:"CF 339D \u2014 Xenia and Bit Operations",link:"https://codeforces.com/problemset/problem/339/D",rating:1700,tags:["segment tree"]},
+        {id:"seg-12",name:"CF 380C \u2014 Sereja and Brackets",link:"https://codeforces.com/problemset/problem/380/C",rating:1900,tags:["segment tree"]},
+        {id:"seg-13",name:"CF 1080F \u2014 Katya and Segments Sets",link:"https://codeforces.com/problemset/problem/1080/F",rating:1900,tags:["segment tree"]},
+        {id:"seg-14",name:"CF 474E \u2014 Pillars",link:"https://codeforces.com/problemset/problem/474/E",rating:1900,tags:["segment tree","dp"]},
+        {id:"seg-15",name:"CF 1549D \u2014 Integers Have Friends",link:"https://codeforces.com/problemset/problem/1549/D",rating:1800,tags:["segment tree","math"]}
+      ]},
+      {name:"Union-Find (DSU)",guide:{title:"DSU",points:["find(x): path compression \u2192 nearly O(1)","union(a,b): union by rank/size","Kruskal's MST: sort edges + DSU"]},problems:[
+        {id:"dsu-1",name:"CF 1411C \u2014 Peaceful Rooks",link:"https://codeforces.com/problemset/problem/1411/C",rating:1700,tags:["dsu","graphs"]},
+        {id:"dsu-2",name:"CF 1076D \u2014 Edge Deletion (DSU)",link:"https://codeforces.com/problemset/problem/1076/D",rating:1800,tags:["dsu","shortest path"]},
+        {id:"dsu-3",name:"CF 1559D1 \u2014 Mocha and Diana (Easy)",link:"https://codeforces.com/problemset/problem/1559/D1",rating:1600,tags:["dsu"]},
+        {id:"dsu-4",name:"CF 1494B \u2014 Berland Crossword",link:"https://codeforces.com/problemset/problem/1494/B",rating:1700,tags:["dsu","bitmask"]},
+        {id:"dsu-5",name:"CF 1513D \u2014 GCD and MST",link:"https://codeforces.com/problemset/problem/1513/D",rating:1700,tags:["dsu","greedy"]},
+        {id:"dsu-6",name:"CF 1157E \u2014 Minimum Array",link:"https://codeforces.com/problemset/problem/1157/E",rating:1700,tags:["dsu","multiset"]},
+        {id:"dsu-7",name:"CF 1131D \u2014 Gourmet Choice",link:"https://codeforces.com/problemset/problem/1131/D",rating:1800,tags:["dsu","topo sort"]},
+        {id:"dsu-8",name:"CF 1208D \u2014 Restore Permutation",link:"https://codeforces.com/problemset/problem/1208/D",rating:1700,tags:["dsu","bit"]},
+        {id:"dsu-9",name:"CF 1213G \u2014 Path Queries",link:"https://codeforces.com/problemset/problem/1213/G",rating:1800,tags:["dsu","sorting"]},
+        {id:"dsu-10",name:"CF 1332D \u2014 Walk on Matrix",link:"https://codeforces.com/problemset/problem/1332/D",rating:1700,tags:["dsu","constructive"]},
+        {id:"dsu-11",name:"CF 1242B \u2014 0-1 MST",link:"https://codeforces.com/problemset/problem/1242/B",rating:1800,tags:["dsu","bfs"]},
+        {id:"dsu-12",name:"CF 1466E \u2014 Apollo vs Pan",link:"https://codeforces.com/problemset/problem/1466/E",rating:1800,tags:["dsu","bitmasks"]},
+        {id:"dsu-13",name:"CF 1027D \u2014 Mouse Hunt",link:"https://codeforces.com/problemset/problem/1027/D",rating:1700,tags:["dsu","graphs"]},
+        {id:"dsu-14",name:"CF 1100E \u2014 Andrew and Taxi",link:"https://codeforces.com/problemset/problem/1100/E",rating:1800,tags:["dsu","binary search"]},
+        {id:"dsu-15",name:"CF 1176F \u2014 Destroy it!",link:"https://codeforces.com/problemset/problem/1176/F",rating:1900,tags:["dsu","dp"]}
+      ]}
+    ]
+  },
+  {
+    id: 5, name: "Phase 5: CM Push", rating: "1700-2000", target: "1900+",
+    topics: [
+      {name:"Advanced Graphs",guide:{title:"Advanced Graphs",points:["SCC: Tarjan's / Kosaraju's","Bridges: edge removal disconnects (low-link)","MST: Kruskal (sort+DSU) or Prim","LCA: binary lifting O(NlogN) pre, O(logN) query"]},problems:[
+        {id:"agr-1",name:"CF 1245D \u2014 Shichikuji and Power Grid",link:"https://codeforces.com/problemset/problem/1245/D",rating:1700,tags:["mst","graphs"]},
+        {id:"agr-2",name:"CF 1108F \u2014 MST Unification",link:"https://codeforces.com/problemset/problem/1108/F",rating:1800,tags:["mst","dsu"]},
+        {id:"agr-3",name:"CF 1141F \u2014 Same Sum Blocks",link:"https://codeforces.com/problemset/problem/1141/F",rating:1800,tags:["graphs","greedy"]},
+        {id:"agr-4",name:"CF 1338B \u2014 Edge Weight Assignment",link:"https://codeforces.com/problemset/problem/1338/B",rating:1800,tags:["trees","constructive"]},
+        {id:"agr-5",name:"CF 1118E \u2014 Yet Another Ball Problem",link:"https://codeforces.com/problemset/problem/1118/E",rating:1800,tags:["graphs","constructive"]},
+        {id:"agr-6",name:"CF 1324E \u2014 Sleeping Schedule",link:"https://codeforces.com/problemset/problem/1324/E",rating:1700,tags:["dp","graphs"]},
+        {id:"agr-7",name:"CF 1491D \u2014 Zookeeper and The Infinite Zoo",link:"https://codeforces.com/problemset/problem/1491/D",rating:1800,tags:["bitmasks","greedy"]},
+        {id:"agr-8",name:"CF 1directing \u2014 1385E Directing Edges",link:"https://codeforces.com/problemset/problem/1385/E",rating:1800,tags:["topo sort","dfs"]},
+        {id:"agr-9",name:"CF 1076E \u2014 Vasya and a Tree",link:"https://codeforces.com/problemset/problem/1076/E",rating:1800,tags:["dfs","euler tour"]},
+        {id:"agr-10",name:"CF 1328E \u2014 Tree Queries",link:"https://codeforces.com/problemset/problem/1328/E",rating:1800,tags:["lca","dfs"]},
+        {id:"agr-11",name:"CF 1370E \u2014 Binary Subsequence Rotation",link:"https://codeforces.com/problemset/problem/1370/E",rating:1900,tags:["greedy","constructive"]},
+        {id:"agr-12",name:"CF 1487E \u2014 Paintings & Drawings",link:"https://codeforces.com/problemset/problem/1487/E",rating:1900,tags:["graphs","dp"]},
+        {id:"agr-13",name:"CF 1239A \u2014 Ivan the Fool and the Bridge",link:"https://codeforces.com/problemset/problem/1239/A",rating:1800,tags:["graphs","math"]},
+        {id:"agr-14",name:"CF 1462F \u2014 The Treasure of The Segments",link:"https://codeforces.com/problemset/problem/1462/F",rating:1800,tags:["binary search","sorting"]},
+        {id:"agr-15",name:"CF 1553E \u2014 Permutation Shift",link:"https://codeforces.com/problemset/problem/1553/E",rating:1900,tags:["graphs","constructive"]}
+      ]}
+    ]
+  }
+];
+
+
+
+// ═══════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════
+let state = { problems: {}, notes: "", contests: [], rating: "" };
+
+function load() {
+  try {
+    const s = localStorage.getItem("cf-cm-tracker");
+    if (s) state = { ...state, ...JSON.parse(s) };
+  } catch(e) { console.error("Load error", e); }
+  // Seed pre-done problems
+  PHASES.forEach(ph => ph.topics.forEach(t => t.problems.forEach(p => {
+    if (p.done && !state.problems[p.id])
+      state.problems[p.id] = { done: true, insight: p.insight || "" };
+  })));
+}
+
+function save() {
+  try { localStorage.setItem("cf-cm-tracker", JSON.stringify(state)); } catch(e) {}
+}
+
+// ═══════════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════════
+let activePhase = 1;
+let openTopics = new Set();
+
+function rc(r) {
+  if (r >= 1900) return "r1900"; if (r >= 1700) return "r1700";
+  if (r >= 1500) return "r1500"; if (r >= 1300) return "r1300";
+  if (r >= 1100) return "r1100"; if (r >= 1000) return "r1000";
+  if (r >= 900) return "r900"; return "r800";
+}
+
+function topicStats(t) {
+  let n = t.problems.length, d = 0;
+  t.problems.forEach(p => { if (state.problems[p.id] && state.problems[p.id].done) d++; });
+  return { total: n, done: d };
+}
+
+function phaseStats(ph) {
+  let n = 0, d = 0;
+  ph.topics.forEach(t => { const s = topicStats(t); n += s.total; d += s.done; });
+  return { total: n, done: d };
+}
+
+function allStats() {
+  let n = 0, d = 0;
+  PHASES.forEach(p => { const s = phaseStats(p); n += s.total; d += s.done; });
+  return { total: n, done: d };
+}
+
+function escAttr(s) { return (s || "").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
+
+// ═══════════════════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════════════════
+function renderPhaseTabs() {
+  document.getElementById("phaseTabs").innerHTML = PHASES.map(p => {
+    const s = phaseStats(p);
+    return '<div class="phase-tab' + (p.id === activePhase ? ' active' : '') + '" onclick="switchPhase(' + p.id + ')">Phase ' + p.id + '<span class="count">(' + s.done + '/' + s.total + ')</span></div>';
+  }).join("");
+}
+
+function renderProblems() {
+  const ph = PHASES.find(p => p.id === activePhase);
+  document.getElementById("problemsContainer").innerHTML = ph.topics.map(function(topic) {
+    const st = topicStats(topic);
+    const pct = st.total ? Math.round(st.done / st.total * 100) : 0;
+    const col = pct === 100 ? "var(--green)" : pct > 50 ? "var(--yellow)" : "var(--blue)";
+
+    let guide = "";
+    if (topic.guide) {
+      guide = '<div class="pattern-guide"><h4>\uD83D\uDCA1 ' + topic.guide.title + '</h4><ul>' +
+        topic.guide.points.map(function(p) { return '<li>' + p + '</li>'; }).join("") + '</ul></div>';
+    }
+
+    let tbl = "";
+    if (topic.problems.length) {
+      tbl = '<table class="problem-table"><tr><th style="width:36px"></th><th>Problem</th><th style="width:60px">Rating</th><th>Tags</th><th>Key Insight</th></tr>' +
+        topic.problems.map(function(p) {
+          var pd = state.problems[p.id] || {};
+          var d = pd.done;
+          return '<tr class="' + (d ? "done" : "") + '">' +
+            '<td><div class="check ' + (d ? "checked" : "") + '" onclick="toggleProblem(\'' + p.id + '\')"></div></td>' +
+            '<td class="p-name"><a href="' + p.link + '" target="_blank">' + p.name + '</a></td>' +
+            '<td><span class="rating ' + rc(p.rating) + '">' + p.rating + '</span></td>' +
+            '<td>' + p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join("") + '</td>' +
+            '<td><input class="insight-input" placeholder="Write insight..." value="' + escAttr(pd.insight) + '" onchange="setInsight(\'' + p.id + '\',this.value)"/></td></tr>';
+        }).join("") + '</table>';
+    } else {
+      tbl = '<div style="padding:20px;color:var(--text-dim);font-size:0.85em">Problems will be added as you reach this phase. Filter CF problemset by tag + rating.</div>';
+    }
+
+    var tKey = activePhase + ':' + topic.name;
+    var isOpen = openTopics.has(tKey);
+    return '<div class="topic-section" data-topic="' + escAttr(tKey) + '"><div class="topic-header' + (isOpen ? ' open' : '') + '" onclick="toggleTopic(this)">' +
+      '<h3><span class="arrow">\u25B6</span> ' + topic.name + '</h3>' +
+      '<div class="topic-progress"><span>' + st.done + '/' + st.total + '</span>' +
+      '<div class="progress-bar"><div class="fill" style="width:' + pct + '%;background:' + col + '"></div></div>' +
+      '<span>' + pct + '%</span></div></div>' +
+      '<div class="topic-body' + (isOpen ? ' open' : '') + '">' + guide + tbl + '</div></div>';
+  }).join("");
+}
+
+function renderProgress() {
+  var a = allStats();
+  var ap = a.total ? Math.round(a.done / a.total * 100) : 0;
+  document.getElementById("statsGrid").innerHTML =
+    '<div class="stat-card highlight"><div class="stat-val">' + a.done + '</div><div class="stat-label">Problems Solved</div></div>' +
+    '<div class="stat-card"><div class="stat-val">' + (a.total - a.done) + '</div><div class="stat-label">Remaining</div></div>' +
+    '<div class="stat-card"><div class="stat-val">' + (state.rating || "\u2014") + '</div><div class="stat-label">CF Rating <span style="cursor:pointer" onclick="editRating()">\u270F\uFE0F</span></div></div>' +
+    '<div class="stat-card"><div class="stat-val" style="color:' + (ap > 70 ? "var(--green)" : ap > 30 ? "var(--yellow)" : "var(--blue)") + '">' + ap + '%</div><div class="stat-label">Overall</div></div>';
+
+  document.getElementById("phaseProgressCards").innerHTML = PHASES.map(function(ph) {
+    var s = phaseStats(ph);
+    return '<div class="phase-progress-card"><h3>' + ph.name + ' \u2192 Target: ' + ph.target + (s.total && s.done === s.total ? " \u2705" : "") + '</h3>' +
+      ph.topics.map(function(t) {
+        var ts2 = topicStats(t);
+        var tp = ts2.total ? Math.round(ts2.done / ts2.total * 100) : 0;
+        var c = tp === 100 ? "var(--green)" : tp > 50 ? "var(--yellow)" : "var(--blue)";
+        var label = t.name.length > 28 ? t.name.substring(0, 28) + "\u2026" : t.name;
+        return '<div class="bar-wrap"><div class="bar-label">' + label + '</div>' +
+          '<div class="big-bar"><div class="fill" style="width:' + tp + '%;background:' + c + '"></div></div>' +
+          '<div class="bar-pct">' + ts2.done + '/' + ts2.total + '</div></div>';
+      }).join("") + '</div>';
+  }).join("");
+}
+
+function renderContests() {
+  var el = document.getElementById("contestList");
+  if (!state.contests.length) {
+    el.innerHTML = '<div style="color:var(--text-dim);padding:10px 0">No contests logged yet.</div>';
+    return;
+  }
+  el.innerHTML = state.contests.slice().reverse().map(function(c, i) {
+    var idx = state.contests.length - 1 - i;
+    var d = c.after - c.before;
+    return '<div class="contest-item"><div><strong>' + escAttr(c.name) + '</strong><br/>' +
+      '<span style="color:var(--text-dim)">' + c.date + ' \u00B7 Solved: ' + escAttr(c.solved) + '</span>' +
+      (c.notes ? '<br/><span style="color:var(--text-dim);font-size:0.8em">' + escAttr(c.notes) + '</span>' : '') +
+      '</div><div style="text-align:right"><span>' + c.before + '\u2192' + c.after + '</span><br/>' +
+      '<span class="delta ' + (d >= 0 ? "positive" : "negative") + '">' + (d >= 0 ? "+" : "") + d + '</span>' +
+      ' <button class="btn btn-sm btn-danger" onclick="removeContest(' + idx + ')">\u00D7</button></div></div>';
+  }).join("");
+}
+
+function renderHeader() {
+  var a = allStats();
+  document.getElementById("h-solved").textContent = a.done;
+  document.getElementById("h-pct").textContent = a.total ? Math.round(a.done / a.total * 100) + "%" : "0%";
+  document.getElementById("h-rating").textContent = state.rating || "\u2014";
+  for (var i = PHASES.length - 1; i >= 0; i--) {
+    if (phaseStats(PHASES[i]).done > 0) {
+      document.getElementById("h-phase").textContent = PHASES[i].id;
+      return;
+    }
+  }
+  document.getElementById("h-phase").textContent = "1";
+}
+
+function renderAll() {
+  renderPhaseTabs();
+  renderProblems();
+  renderProgress();
+  renderContests();
+  renderHeader();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  INTERACTIONS
+// ═══════════════════════════════════════════════════════════
+function switchPhase(id) { activePhase = id; renderPhaseTabs(); renderProblems(); }
+
+function toggleTopic(header) {
+  header.classList.toggle("open");
+  header.nextElementSibling.classList.toggle("open");
+  var key = header.parentElement.getAttribute("data-topic");
+  if (key) { openTopics.has(key) ? openTopics.delete(key) : openTopics.add(key); }
+}
+
+function toggleProblem(id) {
+  if (!state.problems[id]) state.problems[id] = { done: false, insight: "" };
+  state.problems[id].done = !state.problems[id].done;
+  save(); renderAll();
+}
+
+function setInsight(id, val) {
+  if (!state.problems[id]) state.problems[id] = { done: false, insight: "" };
+  state.problems[id].insight = val;
+  save();
+}
+
+function editRating() {
+  var r = prompt("Enter your current Codeforces rating:", state.rating || "");
+  if (r !== null) { state.rating = r; save(); renderAll(); }
+}
+
+function addContest() {
+  var n = document.getElementById("c-name").value;
+  if (!n) { alert("Enter contest name"); return; }
+  state.contests.push({
+    date: document.getElementById("c-date").value,
+    name: n,
+    before: parseInt(document.getElementById("c-before").value) || 0,
+    after: parseInt(document.getElementById("c-after").value) || 0,
+    solved: document.getElementById("c-solved").value,
+    notes: document.getElementById("c-notes").value
+  });
+  state.rating = document.getElementById("c-after").value;
+  save();
+  ["c-date","c-name","c-before","c-after","c-solved","c-notes"].forEach(function(id) {
+    document.getElementById(id).value = "";
+  });
+  renderAll();
+}
+
+function removeContest(i) {
+  if (confirm("Remove this contest entry?")) {
+    state.contests.splice(i, 1);
+    save(); renderAll();
+  }
+}
+
+
+// Tab switching
+document.querySelectorAll(".tab").forEach(function(tab) {
+  tab.addEventListener("click", function() {
+    document.querySelectorAll(".tab").forEach(function(t) { t.classList.remove("active"); });
+    document.querySelectorAll(".page").forEach(function(p) { p.classList.remove("active"); });
+    this.classList.add("active");
+    document.getElementById("page-" + this.dataset.tab).classList.add("active");
+  });
+});
+
+// Export / Import
+function exportData() {
+  var exportObj = { ...state, theme: currentTheme };
+  var blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: "application/json" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "cf-cm-tracker-backup.json";
+  a.click();
+}
+
+function importData(event) {
+  var file = event.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var imported = JSON.parse(e.target.result);
+      if (imported.theme) { applyTheme(imported.theme); delete imported.theme; }
+      state = { ...state, ...imported };
+      save(); renderAll();
+      alert("Data imported successfully!");
+    } catch(err) { alert("Invalid file format"); }
+  };
+  reader.readAsText(file);
+  event.target.value = "";
+}
+
+// ═══════════════════════════════════════════════════════════
+//  THEMES
+// ═══════════════════════════════════════════════════════════
+const THEMES = [
+  { id: "midnight",    name: "Midnight",     colors: ["#1a1a2e","#e94560","#aa00ff"] },
+  { id: "ocean",       name: "Ocean",        colors: ["#0b1622","#02a9ff","#7c4dff"] },
+  { id: "dracula",     name: "Dracula",      colors: ["#282a36","#ff79c6","#bd93f9"] },
+  { id: "nord",        name: "Nord",         colors: ["#2e3440","#88c0d0","#b48ead"] },
+  { id: "monokai",     name: "Monokai",      colors: ["#272822","#f92672","#ae81ff"] },
+  { id: "solarized",   name: "Solarized",    colors: ["#002b36","#cb4b16","#6c71c4"] },
+  { id: "github-dark", name: "GitHub Dark",  colors: ["#0d1117","#f78166","#bc8cff"] },
+  { id: "light",       name: "Light",        colors: ["#f0f2f5","#d63864","#7b1fa2"] }
+];
+
+let currentTheme = "midnight";
+
+function loadTheme() {
+  try {
+    const saved = localStorage.getItem("cf-cm-theme");
+    if (saved) currentTheme = saved;
+  } catch(e) {}
+  applyTheme(currentTheme);
+}
+
+function applyTheme(themeId) {
+  currentTheme = themeId;
+  document.documentElement.setAttribute("data-theme", themeId);
+  try { localStorage.setItem("cf-cm-theme", themeId); } catch(e) {}
+
+  var theme = THEMES.find(function(t) { return t.id === themeId; });
+  if (theme) {
+    var dot = document.getElementById("themeDot");
+    var nameEl = document.getElementById("themeName");
+    if (dot) dot.style.background = theme.colors[1];
+    if (nameEl) nameEl.textContent = theme.name;
+  }
+  renderThemeDropdown();
+}
+
+function renderThemeDropdown() {
+  var dd = document.getElementById("themeDropdown");
+  if (!dd) return;
+  dd.innerHTML = THEMES.map(function(t) {
+    return '<div class="theme-option' + (t.id === currentTheme ? ' active' : '') + '" onclick="selectTheme(\'' + t.id + '\')">' +
+      '<span class="dot"></span>' +
+      '<span>' + t.name + '</span>' +
+      '<span class="swatch">' +
+        t.colors.map(function(c) { return '<span style="background:' + c + '"></span>'; }).join("") +
+      '</span></div>';
+  }).join("");
+}
+
+function toggleThemeDropdown() {
+  var dd = document.getElementById("themeDropdown");
+  dd.classList.toggle("open");
+}
+
+function selectTheme(id) {
+  applyTheme(id);
+  document.getElementById("themeDropdown").classList.remove("open");
+}
+
+// Close dropdown on outside click
+document.addEventListener("click", function(e) {
+  var sel = document.querySelector(".theme-selector");
+  if (sel && !sel.contains(e.target)) {
+    document.getElementById("themeDropdown").classList.remove("open");
+  }
+});
+
+// ═══════════════════════════════════════════════════════════
+//  RANDOM QUESTION PICKER
+// ═══════════════════════════════════════════════════════════
+let randomPhaseFilter = 0; // 0 = all phases
+
+function openRandomModal() {
+  renderRandomPhaseFilter();
+  pickRandom();
+  document.getElementById("randomModal").classList.add("open");
+}
+
+function closeRandomModal() {
+  document.getElementById("randomModal").classList.remove("open");
+}
+
+function renderRandomPhaseFilter() {
+  var html = '<div class="rp-btn' + (randomPhaseFilter === 0 ? ' active' : '') + '" onclick="setRandomPhase(0)">All Phases</div>';
+  PHASES.forEach(function(p) {
+    html += '<div class="rp-btn' + (randomPhaseFilter === p.id ? ' active' : '') + '" onclick="setRandomPhase(' + p.id + ')">Phase ' + p.id + '</div>';
+  });
+  document.getElementById("randomPhaseFilter").innerHTML = html;
+}
+
+function setRandomPhase(id) {
+  randomPhaseFilter = id;
+  renderRandomPhaseFilter();
+  pickRandom();
+}
+
+function pickRandom() {
+  var pool = [];
+  var phases = randomPhaseFilter === 0 ? PHASES : PHASES.filter(function(p) { return p.id === randomPhaseFilter; });
+  phases.forEach(function(ph) {
+    ph.topics.forEach(function(t) {
+      t.problems.forEach(function(p) {
+        var pd = state.problems[p.id];
+        if (!pd || !pd.done) {
+          pool.push({ problem: p, phase: ph, topic: t });
+        }
+      });
+    });
+  });
+
+  var el = document.getElementById("randomResult");
+  if (pool.length === 0) {
+    el.innerHTML = '<div class="random-empty">\uD83C\uDF89 All problems solved' + (randomPhaseFilter ? ' in Phase ' + randomPhaseFilter : '') + '!</div>';
+    return;
+  }
+
+  var pick = pool[Math.floor(Math.random() * pool.length)];
+  var p = pick.problem;
+  el.innerHTML = '<div class="random-result">' +
+    '<div class="rr-phase">Phase ' + pick.phase.id + ' \u2022 ' + pick.phase.name + '</div>' +
+    '<div class="rr-topic">' + pick.topic.name + '</div>' +
+    '<div class="rr-name"><a href="' + p.link + '" target="_blank">' + p.name + '</a></div>' +
+    '<div class="rr-meta">' +
+      '<span class="rating ' + rc(p.rating) + '">' + p.rating + '</span>' +
+      p.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join("") +
+    '</div></div>';
+}
+
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeRandomModal();
+});
+
+// ═══════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════
+loadTheme();
+load();
+renderAll();
+</script>
+</body>
+</html>

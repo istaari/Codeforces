@@ -1,6 +1,6 @@
 {
     "github.copilot.enable": {
-        "*": true
+        "*": false
     },
     "chat.agent.profiles": {
         "analyst": {
