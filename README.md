@@ -1,168 +1,69 @@
-# **Codeforces Ranking System & Divisions**
+# Codeforces Reference Guide
 
+## Ratings & Titles
 
-### **1. Codeforces Ratings and Titles**
+| Rating | Title | Color |
+|--------|-------|-------|
+| 2600+ | Legendary Grandmaster | 🔴 Red |
+| 2400–2599 | Grandmaster | 🔴 Red |
+| 2300–2399 | International Master | 🟠 Orange |
+| 2100–2299 | Master | 🟠 Orange |
+| 1900–2099 | Candidate Master | 🟣 Purple |
+| 1600–1899 | Expert | 🔵 Blue |
+| 1400–1599 | Specialist | 🔷 Cyan |
+| 1200–1399 | Pupil | 🟢 Green |
+| 0–1199 | Newbie | ⚪ Gray |
 
-Codeforces assigns **ratings** based on performance in **rated contests**. Your rating determines your **title (rank)**,
-as shown below:
-
-| **Rating**      | **Title**             | **Color** |
-|-----------------|-----------------------|-----------|
-| **2600+**       | Legendary Grandmaster | 🔴 Red    |
-| **2400 - 2599** | Grandmaster           | 🔴 Red    |
-| **2300 - 2399** | International Master  | 🟠 Orange |
-| **2100 - 2299** | Master                | 🟠 Orange |
-| **1900 - 2099** | Candidate Master      | 🟣 Purple |
-| **1600 - 1899** | Expert                | 🔵 Blue   |
-| **1400 - 1599** | Specialist            | 🔷 Cyan   |
-| **1200 - 1399** | Pupil                 | 🟢 Green  |
-| **0 - 1199**    | Newbie                | ⚪ Gray    |
-
-- **Your rating starts at 0.** After **your first rated contest**, you'll get a rating based on your performance.
-- **Higher rating → Higher title** (like in chess rankings).
-- **Color coding** helps visually distinguish skill levels in the community.
+Ratings start at 0 and update after each rated contest. Higher rating → higher title (chess-style).
 
 ---
 
-### **2. Codeforces Divisions (Div. 1, Div. 2, etc.)**
+## Divisions
 
-To ensure fair competition, **Codeforces contests are divided into divisions** based on rating:
-
-| **Division**           | **Who can participate?**                           |
-|------------------------|----------------------------------------------------|
-| **Div. 1**             | **Rating 1900+** (Experts and above)               |
-| **Div. 2**             | **Rating 1200 - 1899** (Specialists & Experts)     |
-| **Div. 3**             | **Rating 0 - 1600** (Newbies, Pupils, Specialists) |
-| **Div. 4**             | **Rating 0 - 1400** (Beginners)                    |
-| **Educational Rounds** | Open for all (but unofficial)                      |
-
-- **Div. 1 contests** have **harder** problems aimed at **high-rated** participants.
-- **Div. 2 contests** are **moderate difficulty** for growing programmers.
-- **Div. 3 & Div. 4 contests** are meant for **beginners**, helping them get used to CP.
-- **Educational Rounds** do not affect rating but are good for practice.
+| Division | Eligibility |
+|----------|-------------|
+| Div. 1 | Rating 1900+ |
+| Div. 2 | Rating 1200–1899 |
+| Div. 3 | Rating 0–1600 |
+| Div. 4 | Rating 0–1400 |
+| Educational | Open to all (unrated) |
 
 ---
 
-### **3. Problem Ratings and Difficulty Levels**
+## Problem Difficulty
 
-Each **Codeforces problem** has a **rating** (like 800, 1200, 1500, etc.), indicating difficulty:
+| Rating | Level | Target |
+|--------|-------|--------|
+| 800–1000 | Very Easy | Newbie, Pupil |
+| 1100–1400 | Easy–Medium | Pupil, Specialist |
+| 1500–1800 | Medium–Hard | Specialist, Expert |
+| 1900–2400 | Hard | Candidate Master+ |
+| 2500+ | Very Hard | Grandmaster+ |
 
-| **Problem Rating** | **Difficulty Level** | **Who Should Solve It?** |
-|--------------------|----------------------|--------------------------|
-| **800 - 1000**     | Very Easy (Beginner) | Newbies, Pupil           |
-| **1100 - 1400**    | Easy-Medium          | Pupil, Specialist        |
-| **1500 - 1800**    | Medium-Hard          | Specialist, Expert       |
-| **1900 - 2400**    | Hard                 | Candidate Master, Master |
-| **2500+**          | Very Hard            | Grandmasters             |
-
-- **Div. 4 problems** are around **800-1400**.
-- **Div. 3 problems** range **800-1800**.
-- **Div. 2 problems** range **1000-2400**.
-- **Div. 1 problems** go up to **3500+ (Legendary Grandmaster level)**.
+**Division ranges:** Div.4 → 800–1400 · Div.3 → 800–1800 · Div.2 → 1000–2400 · Div.1 → up to 3500+
 
 ---
 
-## **Concepts Required for Different Codeforces Problem Ratings**
+## Roadmap by Rating
 
-### **🔰 Beginner Level (800 - 1200)**
-
-**📌 Concepts Required:**
-
-- **Basic Math** (Modulo, GCD, LCM, Prime Numbers)
-- **Greedy Thinking** (Simple greedy choices)
-- **Brute Force** (Checking all possibilities)
-- **Sorting** (Using `Arrays.sort()` or `Collections.sort()`)
-- **Basic Implementation** (Simulating a problem step-by-step)
-- **Simple Loops & Conditions** (`for`, `while`, `if-else`)
-- **Basic String Operations** (`charAt()`, `substring()`, `toUpperCase()`)
-
-**🎯 Example Problems:**
-
-- **800** → Simple conditions (e.g., odd/even check)
-- **900** → Sorting + Basic math
-- **1000** → Simple greedy logic
-
-**🛠 Recommended Practice:**  
-✅ **[Codeforces Problem (800-1200)](https://codeforces.com/problemset?tags=800-1200)**
+### ⚪ Beginner · 800–1200
+**Concepts:** Basic Math (GCD, LCM, Primes) · Brute Force · Sorting · Greedy · String ops · Loops & Conditions  
+**Practice:** [CF 800–1200](https://codeforces.com/problemset?tags=800-1200)
 
 ---
 
-### **🔰 Intermediate Level (1300 - 1800)**
-
-**📌 Concepts Required:**
-
-- **Two Pointers** (Finding subarrays efficiently)
-- **Binary Search** (Search within sorted data)
-- **Prefix Sum / Difference Array** (Optimizing range queries)
-- **Sliding Window** (Efficiently handling contiguous subarrays)
-- **Bit Manipulation** (XOR tricks, counting bits)
-- **Hashing & Frequency Maps** (`HashMap`, `Set`)
-- **Stack & Queue** (Balanced Parentheses, Next Greater Element)
-- **Basic Recursion** (Generating sequences, simple DFS)
-
-**🎯 Example Problems:**
-
-- **1300** → Two Pointers, Basic DP
-- **1400** → Hashing + Sorting
-- **1500** → Binary Search, Greedy Thinking
-- **1600-1800** → More complex DP & Graphs
-
-**🛠 Recommended Practice:**  
-✅ **[Codeforces Problem (1300-1800)](https://codeforces.com/problemset?tags=1300-1800)**  
-✅ **[Leetcode Medium Problems](https://leetcode.com/problemset/all/)**
+### 🟢 Intermediate · 1300–1800
+**Concepts:** Two Pointers · Binary Search · Prefix Sum · Sliding Window · Bit Manipulation · HashMap/Set · Stack & Queue · Basic Recursion/DFS  
+**Practice:** [CF 1300–1800](https://codeforces.com/problemset?tags=1300-1800) · [LeetCode Medium](https://leetcode.com/problemset/all/)
 
 ---
 
-### **🔰 Advanced Level (1900 - 2400)**
-
-**📌 Concepts Required:**
-
-- **Dynamic Programming (DP)**
-    - DP on **Subarrays, Trees, Graphs**
-    - **Bitmask DP**, **Knapsack DP**
-- **Graph Algorithms**
-    - BFS, DFS, Dijkstra’s Algorithm
-    - Floyd-Warshall, Bellman-Ford
-    - **Strongly Connected Components (SCC)**
-- **Segment Tree / Fenwick Tree (BIT)**
-    - Range Queries (Sum, Min, Max)
-- **Mathematical Algorithms**
-    - Combinatorics, Modulo Inverse
-    - Fermat’s Theorem, Matrix Exponentiation
-- **Greedy + DP Hybrid**
-    - Problems that require both optimization & dynamic decisions
-
-**🎯 Example Problems:**
-
-- **1900** → Advanced Greedy, Basic Graphs
-- **2000** → DP Optimization
-- **2200+** → Segment Trees, Heavy-Light Decomposition
-
-**🛠 Recommended Practice:**  
-✅ **[Codeforces Problem (1900-2400)](https://codeforces.com/problemset?tags=1900-2400)**
+### 🔵 Advanced · 1900–2400
+**Concepts:** DP (Subarrays, Trees, Bitmask, Knapsack) · Graphs (BFS/DFS, Dijkstra, Floyd-Warshall, SCC) · Segment/Fenwick Tree · Combinatorics · Matrix Exponentiation  
+**Practice:** [CF 1900–2400](https://codeforces.com/problemset?tags=1900-2400)
 
 ---
 
-### **🔰 Expert / Grandmaster Level (2500 - 3500)**
-
-**📌 Concepts Required:**
-
-- **Advanced Graph Theory**
-    - **Centroid Decomposition**
-    - **Minimum Spanning Trees (MST)**
-    - **Flow Algorithms (Ford-Fulkerson, Edmonds-Karp)**
-- **Advanced Data Structures**
-    - **Persistent Segment Tree**
-    - **Trie, Mo’s Algorithm**
-- **Game Theory & Combinatorial Optimization**
-- **Heavy-Light Decomposition**
-- **Polynomial & FFT (Fast Fourier Transform)**
-
-**🎯 Example Problems:**
-
-- **2500** → DP with Bitmasking, Advanced Graph
-- **2800** → Geometry & Computational Algebra
-- **3000+** → Hard Theoretical CS problems
-
-**🛠 Recommended Practice:**  
-✅ **[Codeforces Hard Problems (2500+)](https://codeforces.com/problemset?tags=2500-3500)**
+### 🔴 Expert / Grandmaster · 2500–3500
+**Concepts:** Advanced Graphs (Centroid Decomp, MST, Flow Algorithms) · Persistent Segment Tree · Trie · Mo's Algorithm · Game Theory · FFT  
+**Practice:** [CF 2500–3500](https://codeforces.com/problemset?tags=2500-3500)
