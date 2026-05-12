@@ -23,7 +23,7 @@ bin/
 /.nb-gradle/
 
 ### VS Code ###
-# .vscode/ — kept in repo for agent profiles & tasks
+.vscode/
 
 ### Compiled ###
 *.class
